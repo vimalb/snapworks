@@ -37,3 +37,10 @@ Running Mobile App on Android Phone:
 		# node web.js
 	Build and Install App:
 		# cordova run android
+
+Adding to Heroku:
+	heroku git:remote -a snapworks-api --remote snapworks-api
+	heroku buildpacks:set --app snapworks-api https://github.com/heroku/heroku-buildpack-python
+	heroku git:remote -a snapworks-app --remote snapworks-app
+	heroku buildpacks:set --app snapworks-app https://github.com/heroku/heroku-buildpack-nodejs
+
