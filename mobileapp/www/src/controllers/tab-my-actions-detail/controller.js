@@ -25,7 +25,7 @@ angular.module(MODULE_NAME, ['ionic', 'ngCordova'])
       }
     });
   })
-  .controller(CONTROLLER_NAME, function($scope, $stateParams, itemSearchService, userService, $state, $cordovaSocialSharing, CLIENT_SETTINGS, $timeout) {
+  .controller(CONTROLLER_NAME, function($scope, $stateParams, itemSearchService, userService, $state, $cordovaSocialSharing, CLIENT_SETTINGS, $timeout, $interval) {
       $scope.item = {};
       $scope.SERVER_URL = CLIENT_SETTINGS.SERVER_URL;
 

@@ -31,12 +31,14 @@ angular.module(MODULE_NAME, ['ionic', 'ngStorage'])
     $scope.cameraInfo = { isEnabled: false };
     $scope.photoInfo = null;
     $scope.reportedIssue = null;
+    $scope.state = 'taking_photo'; // taking_photo, choosing_issue, uploading_issue, confirming_issue
     $scope.SERVER_URL = CLIENT_SETTINGS.SERVER_URL;
 
     $scope.resetPhoto = function() {
       $scope.cameraInfo.isEnabled = true;
       $scope.photoInfo = null;      
       $scope.reportedIssue = null;
+      $scope.state = 'taking_photo';
     }
 
     $scope.takeSnapshot = function() {
@@ -46,13 +48,16 @@ angular.module(MODULE_NAME, ['ionic', 'ngStorage'])
     $scope.onSnapshotTaken = function(base64photo) {
       $scope.cameraInfo.isEnabled = false;
       $scope.photoInfo = base64photo;
+      $scope.state = 'choosing_issue';
     }
 
 
     $scope.reportIssue = function(issueType) {
       var issue = {'issue_type': issueType,
                    'photo': $scope.photoInfo }
+      $scope.state = 'uploading_issue';
       itemSearchService.createItem(issue).then(function(newIssue) {
+        $scope.state = 'confirming_issue';
         $scope.reportedIssue = newIssue;
         $timeout(function() {
           $scope.resetPhoto();

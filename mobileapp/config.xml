@@ -8,8 +8,8 @@
         Team Skeletor
     </author>
     <content src="index.html" />
-    <hook src="hooks/renderEnvironment.js" type="before_compile" />
-    <hook src="hooks/updateAndroidManifest.py" type="before_compile" />
+    <hook src="hooks/renderEnvironment.js" type="before_build" />
+    <hook src="hooks/updateAndroidManifest.py" type="before_build" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

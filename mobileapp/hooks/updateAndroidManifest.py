@@ -29,6 +29,8 @@ required_permissions = [
     'android.permission.RECORD_AUDIO',
     'android.permission.WAKE_LOCK',
     'android.permission.WRITE_EXTERNAL_STORAGE',
+    'android.permission.ACCESS_COARSE_LOCATION',
+    'android.permission.ACCESS_FINE_LOCATION',
 ]
 
 for permission in [p for p in required_permissions if p not in current_permissions]:
