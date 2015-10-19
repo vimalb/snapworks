@@ -14,6 +14,7 @@
           type: '@',
           media: '=ngModel',
           takePicture: '=',
+          switchCamera: '=',
           width: '@',
           height: '@',
           overlaySrc: '=',
@@ -65,6 +66,9 @@
             });
             */
           };
+          scope.switchCamera = function() {
+            console.log("hello world");
+          }
           scope.takePicture = function () {
             var canvas, context, countdownTick, countdownTime;
             canvas = window.document.getElementById('ng-photo-canvas');

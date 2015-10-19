@@ -13,9 +13,12 @@
 		  height="240"
 		  countdown="0"
 		  ng-model="cameraInfo.photo"
+		  switch-camera="cameraInfo.switchCamera"
 		  take-picture="cameraInfo.takePicture"
 		  capture="onSnapshotTaken(media)"
 		  ></ng-camera>
+
+	  	<button id="snapshot-button" class="button button-full button-calm" ng-click="switchCam()">Switch Camera</button>
 
 	  	<button id="snapshot-button" class="button button-full button-calm" ng-click="takeSnapshot()">Fix It!</button>
 	</div>

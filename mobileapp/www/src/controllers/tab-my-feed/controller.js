@@ -45,6 +45,10 @@ angular.module(MODULE_NAME, ['ionic', 'ngStorage'])
       $scope.cameraInfo.takePicture();
     }
 
+    $scope.switchCam = function() {
+      $scope.cameraInfo.switchCamera();
+    }
+
     $scope.onSnapshotTaken = function(base64photo) {
       $scope.cameraInfo.isEnabled = false;
       $scope.photoInfo = base64photo;
