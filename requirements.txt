@@ -1,0 +1,13 @@
+nose
+requests
+textblob
+python-dateutil
+Flask
+flask-cors
+beautifulsoup4
+nltk
+pytz
+gunicorn
+pymongo
+geopy
+

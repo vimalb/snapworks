@@ -1,0 +1,38 @@
+<ion-view>
+  <ion-nav-title>
+      <img class="header-logo-left" src="assets/img/logo-white.png"></img>
+      Snapworks
+  </ion-nav-title>
+  <ion-content class="padding item-feed">
+  	<div ng-show="!photoInfo">
+
+		<ng-camera
+		  type="photo"
+		  enabled="cameraInfo.isEnabled"
+		  width="320"
+		  height="240"
+		  countdown="0"
+		  ng-model="cameraInfo.photo"
+		  take-picture="cameraInfo.takePicture"
+		  capture="onSnapshotTaken(media)"
+		  ></ng-camera>
+
+	  	<button id="snapshot-button" class="button button-full button-calm" ng-click="takeSnapshot()">Fix It!</button>
+	</div>
+	<div ng-show="photoInfo && !reportedIssue">
+		<img ng-src="{{ photoInfo }}"></img>
+	  	<button class="button button-full button-calm" ng-click="reportIssue('litter')">Report Trash</button>
+	  	<button class="button button-full button-calm" ng-click="reportIssue('graffiti')">Report Graffiti</button>
+	  	<button class="button button-full button-calm" ng-click="reportIssue('other')">Report Other</button>
+	</div>
+
+	<div ng-show="reportedIssue">
+		<img ng-src="{{ photoInfo }}"></img>
+		Thank you for reporting {{ reportedIssue.issue_type }}
+	</div>
+
+
+    <br>
+  </ion-content>
+
+</ion-view>

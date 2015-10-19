@@ -1,0 +1,30 @@
+<ion-view>
+  <ion-nav-title>
+    <img class="header-logo-left" src="assets/img/logo-white.png"></img>
+    My Items
+  </ion-nav-title>
+  <ion-content class="padding routes">
+    <div class="list">
+      <div class="item item-divider section">
+        Issues You Reported
+      </div><!-- /item item-divider section -->
+      <div class="card" ng-repeat="item in myItems" ng-click="goItemDetail(item.item_id)">
+        <div class="item item-divider header">
+          <div class="route-title">
+            <span>{{ item.issue_type }}</span>
+          </div>
+        </div><!-- item item-divider header -->
+
+        <div class="item item-image">
+          <img class="route-image" ng-src="{{ item.photo }}" >
+        </div>
+
+      </div>
+
+
+    </div>
+    <br>
+
+  </ion-content>
+
+</ion-view>

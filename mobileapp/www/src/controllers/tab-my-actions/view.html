@@ -1,0 +1,27 @@
+<ion-view>
+  <ion-nav-title>
+    <img class="header-logo-left" src="assets/img/logo-white.png"></img>
+    Volunteer
+  </ion-nav-title>
+  <ion-content class="padding pledges">
+    <button ng-show="!currentUser.access_token" id="login-button" class="login button button-full button-calm" ng-click="goLogin()">Sign in</button>
+
+    <div class="name">
+      <h3>Nearby Issues</h3>
+    </div>
+
+    <div class="list">
+
+      <div class="card" ng-repeat="item in items" ng-click="goItemDetail(item.item_id)">
+        <div class="item item-avatar">
+          <img class="profile-img" ng-src="{{ item.photo }}">
+          <p>{{ item.issue_type }}</p>
+        </div>
+      </div><!-- /card -->
+
+    </div><!-- /list -->
+    <br>
+
+  </ion-content>
+
+</ion-view>

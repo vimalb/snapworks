@@ -1,0 +1,35 @@
+<ion-view>
+  <ion-nav-title>Volunteer: {{ item.issue_type }}</ion-nav-title>
+  <ion-content class="padding pledges-detail">
+    <div class="name">
+      <h3>Volunteer</h3>
+      <h3>{{ item.issue_type }}</h3>
+    </div>
+
+    <div class="card">
+      <div class="item item-image">
+        <img class="route-image" ng-src="{{ item.photo }}" >
+      </div>
+
+    </div><!-- /card -->
+
+
+    <div class="comment_bar">
+      <div class="add_comment">
+        <input ng-model="newMessage.text" class="comment_box" placeholder=""></input>
+        <button ng-click="submitMessage()" class="comment_submit">Send</button>
+      </div>
+    </div>
+
+    <div class="comment" ng-repeat="message in messages">
+      <p class="add_comment"><span class="comment-username">@{{ message.username }}:</span> {{ message.text }}</p>
+    </div>
+
+    <button class="button button-full button-balanced" ng-click="shareOnFacebook()">
+      Share on Facebook
+    </button>
+
+
+  </ion-content>
+
+</ion-view>

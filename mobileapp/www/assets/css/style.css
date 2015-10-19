@@ -1,0 +1,462 @@
+/* Empty. Add your own CSS if you like */
+
+/*global*/
+
+img.header-logo-left {
+  width: 30px;
+  height: 30px;
+  margin-top: 8px;
+  margin-right: 6px;
+  float: left;
+}
+
+ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
+    color: lightblue;
+}
+
+ui-gmap-google-map.trip-map-summary > div.angular-google-map > div.angular-google-map-container {
+  width: 100%;
+  height: 300px; /* this needs to be in px because google maps? */
+}
+
+.nav-bar-block .bar {
+  background-color: #03A9F4 !important;
+}
+
+.bar.bar-stable .title {
+  color: white !important;
+}
+
+.bar-stable .back-button .icon.ion-ios-arrow-back {
+  color: white !important;
+}
+
+.bar-stable .back-button .icon.ion-android-arrow-back {
+  color: white !important;
+}
+
+/* temporarily here because we still have some images */
+img.trip-map-summary {
+  width: 100%;
+  height: 300px;
+}
+
+/* list dividers */
+.item.item-divider.section {
+  border: none;
+  font-weight: 500;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.hide {
+  display: none;
+}
+
+.login.button {
+  margin: 10px auto;
+  /*background-color: #80D8FF;
+  color: black;
+  border-color: #03A9F4;*/
+  /*background-color: #B3E5FC;
+  color: black;*/
+}
+
+
+
+/*
+progress[value]::-webkit-progress-bar {
+  background-color: #00E676;
+}
+
+progress[value]::-webkit-progress-value {
+    border-radius: 2px;
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+*/
+
+
+
+/*
+ * Feed tab styling
+ */
+
+/* trip card background image */
+.trip-feed .item.item-divider.date {
+  /*background-color: #03A9F4;
+  color: white;*/
+  border: none;
+}
+
+.trip-feed .card {
+  margin: 10px;
+}
+
+/*.trip-feed .card.my-pledge {
+  background-color: #C1FFC1;
+}*/
+
+.trip-feed .card.avatar {
+  height: 75px;
+}
+
+/* header details for the card */
+.trip-feed .card .item.item-avatar.header {
+  background-color: rgba(255, 255, 255, 1);
+  color: black;
+}
+
+.trip-feed .card.my-pledge {
+  border: 1px solid #00FF00;
+  /*border: 1px solid #FF6D00;*/
+}
+
+.trip-feed .card.my-pledge .item.item-avatar.header {
+  background-color: #F0FFF0;
+  /*background-color: #FFAB40;*/
+}
+
+.trip-feed .card.pledge .item.item-avatar.header .amount {
+  font-style: bold;
+  font-weight: 700;
+}
+
+.trip-feed .card.friend-pledge .item.item-avatar.header {
+  background-color: #E1F5FE;
+  /*background-color: #FFAB40;*/
+}
+
+/* stats for trip cards */
+.trip-feed .card .item.item-avatar.header .summary-stats {
+  padding-right: 30px;
+}
+
+
+.trip-feed .card .item.item-avatar.header img.backer {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  width: 65px;
+  -webkit-filter: saturate(3);
+}
+
+/*
+ * Trip Detail
+ */
+
+.trip-detail .name {
+  margin: 20px auto;
+}
+
+.trip-detail img.avatar {
+  max-width: 40px;
+  max-height: 40px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.trip-detail .total {
+  background-color: rgba(214, 214, 214, .5);
+  padding: 30px;
+}
+
+/*
+ *- Routes tab styling
+ */
+
+
+.routes .list .card {
+  margin: 10px;
+  position: relative;
+}
+
+.routes .list .card .item.header {
+  /*position: absolute;
+  top: 0;*/
+  width: 100%;
+  padding: 20px 15px;
+  line-height: 1.5em;
+  background-color: rgba(255, 255, 255, 1);
+  color: black;
+  z-index: 1000;
+}
+
+.routes .list .card .item.header .details {
+  color: #AAAAAA;
+  margin-top: 10px;
+}
+
+.routes .list .card .item.header .details .stats {
+  display: inline-block;
+}
+
+.routes .list .card .item.header .details .stats-value {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.routes .list .card .item.header .details .stats-value:first-child {
+  margin-right: 25px;
+}
+
+.routes .list .card .item.header .details .stats-label {
+  color: darkgray;
+}
+
+.routes .list .card .item.item-image .route-image {
+  z-index: -1;
+}
+
+.routes .list .card .item.item-image .map-heart {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  color: gray;
+  font-size: 2.5em;
+}
+
+.routes .list .card .item.item-image .contribute-button {
+  /*background-color: #FFC107;
+  border: none;
+  color: black;*/
+  font-style: bold;
+  font-weight: 500;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+.routes .list .card .item.footer .supporter-stats {
+  padding: 10px;
+  color: green;
+}
+
+/*
+ * Routes Detail styling
+ */
+
+.route-detail .name {
+  padding: 20px;
+  text-align: center;
+}
+
+
+.route-detail .stats {
+  width: 100%;
+  font-size: 1em;
+  margin: 15px auto;
+}
+
+.route-detail .stats-bold {
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.route-detail .stats progress[value] {
+  margin: 5px auto;
+}
+
+.route-detail .details {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 100%;
+}
+
+.route-detail .details .detailed-stats {
+  font-size: 1em;
+}
+
+.route-detail .details .detailed-stats li {
+  display: inline-block;
+  padding-right: 40px;
+}
+
+.route-detail .details .detailed-stats li .stats-value {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-right: 10px;
+}
+
+.route-detail .details .detailed-stats li .stats-label {
+  color: darkgray;
+}
+
+.route-detail img.avatar {
+  max-width: 40px;
+  max-height: 40px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.route-detail .hr-divider {
+  border: none;
+  background-color: #E0E0E0;
+  height: 2px;
+  margin: 25px auto;
+}
+
+.route-detail .total {
+  background-color: rgba(214, 214, 214, .5);
+  padding: 30px;
+}
+
+
+/*
+ * Routes Pledge styling
+ */
+
+.route-pledge .name {
+  padding: 20px;
+  text-align: center;
+}
+
+.route-pledge .card .item h2 {
+  padding-top: 10px;
+  font-weight: 500;
+}
+
+.route-pledge .card .checkmark {
+  padding-top: 10px;
+  float: right;
+  color: gray;
+}
+
+.route-pledge .card.selected {
+  border: 1px solid #00E676;
+}
+
+.route-pledge .card.selected .checkmark {
+  padding-top: 0px;
+  color: #00E676;
+  font-size: 2em;
+  float: right;
+}
+
+.route-pledge .total {
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #E1F5FE;
+}
+
+.route-pledge .thanks {
+  margin: 10px auto;
+  text-align: center;
+}
+
+/*
+ * My Pledges tab styling
+ */
+
+.pledges .name {
+  padding: 20px;
+  text-align: center;
+}
+
+.pledges .name h3{
+  margin: 0 auto;
+}
+
+.pledges .list .card {
+  margin: 20px 10px;
+  position: relative;
+}
+
+.pledges .list .card.no-pledges {
+  background-color: #F2F2F2;
+}
+
+.pledges .list .card .item-avatar h2 {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.pledges .list .card .item-avatar h2 .price {
+  font-style: bold;
+}
+
+
+/* XXX this image cropping is pretty sketch */
+.pledges .list .card .item-body .spacer {
+  margin: 100px;
+}
+
+.pledges .list .card .item-body img.trip-map-summary {
+  height: 300px;
+  z-index: 1000;
+  position: absolute;
+  top: 0;
+}
+/* end of sketch image cropping */
+
+/*
+ * Pledges detail
+ */
+.pledges-detail .card .item.price h2{
+  text-align: center;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.pledges-detail .card img.route-image {
+  width: 100%;
+  height: 300px;
+}
+
+.pledges-detail .name {
+  padding: 20px;
+  text-align: center;
+}
+
+.pledges-detail .name h3{
+  margin: 0 auto;
+}
+
+.pledges-detail .list .card .item-avatar h2 {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.pledges-detail .list .card .item-avatar h2 .price {
+  font-style: bold;
+}
+
+.pledges-detail .list .card .item-body {
+  padding: 0;
+}
+
+
+/* start of section that probably should be pulled into directive
+   with route-detail? */
+.pledges-detail .card img.route-image {
+  width: 100%;
+  height: 300px;
+}
+
+.pledges-detail .card .item-body .details {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  padding: 10px;
+}
+
+.pledges-detail .card .item-body li {
+  display: inline-block;
+  padding-right: 20px
+}
+
+.pledges-detail .details .detailed-stats li .stats-value {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.pledges-detail .details .detailed-stats li .stats-label {
+  color: darkgray;
+}

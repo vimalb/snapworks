@@ -1,0 +1,36 @@
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="description" content="">
+	    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+	    <meta property="og:title" content="{{ item.name }}" />
+	    <meta property="og:site_name" content="Skeletor"/>
+	    <meta property="og:description" content="{{ item.description }}" />
+	    <meta property="og:image" content="{{ SERVER_URL }}/api/items/{{ item.item_id }}/image" />
+	    <link rel='stylesheet' href='/lib/jquery-ui/jquery-ui.css'>
+	    <link rel='stylesheet' href='/lib/nouislider/jquery.nouislider.css'>
+	    <link rel='stylesheet' href='/lib/font-awesome/css/font-awesome.css'>
+	    <link rel="stylesheet" href="/lib/angular-material/angular-material.css"/>
+	    <link rel="stylesheet" href="/lib/angular-carousel/angular-carousel.css"/>
+	    <link rel='stylesheet' href='/assets/fonts/fonts.css'>
+	    <link rel="stylesheet" href="/assets/app.css"/>
+	</head>
+	<body>
+		<md-content class="md-padding">
+		 	<md-toolbar class="app-header">
+		    	<div class="md-toolbar-tools">
+		      		<h2 class="md-flex">Skeletor</h2>
+		    	</div>
+		  	</md-toolbar>
+			<md-card>
+				<md-card-content>
+					<h2 class="md-title">{{ item.name }}</h2>
+					<p>{{ item.description }}</p>
+				</md-card-content>
+				<img src="{{ SERVER_URL }}/api/items/{{ item.item_id }}/image" class="md-card-image"></img>
+			</md-card>
+			<br/>
+		</md-content>
+	</body>
+</html>

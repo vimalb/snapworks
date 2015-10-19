@@ -1,0 +1,254 @@
+<md-toolbar class="app-header">
+  <div class="md-toolbar-tools">
+    <img class="logo" src="/assets/icons/logo.png"></img>
+    <h2 class="md-flex">Admin Dashboard</h2>
+  </div>
+</md-toolbar>
+
+<div class="container">
+
+  <div layout="row" class="heading">
+    <h2>Overall Summary</h2>
+  </div>
+
+  <div layout="row">
+    <div flex flex="33">
+      <md-card class="blue">
+        <md-card-content>
+          <h2>Item1</h2>
+          <h1>1</h1>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div flex flex="33" >
+      <md-card class="yellow">
+        <md-card-content>
+          <h2>Item2</h2>
+          <h1>2</h1>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div flex flex="33" >
+      <md-card class="teal">
+        <md-card-content>
+          <h2>Item3</h2>
+          <h1>3</h1>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div flex flex="33" >
+      <md-card class="red">
+        <md-card-content>
+          <h2>Item4</h2>
+          <h1>4</h1>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div flex flex="33" >
+      <md-card class="indigo">
+        <md-card-content>
+          <h2>Item5</h2>
+          <h1>5</h1>
+        </md-card-content>
+      </md-card>
+    </div>
+  </div><!-- end of summary card -->
+
+  <div layout="row" class="heading">
+    <h2>Daily Summary</h2>
+  </div>
+
+  <div layout="row">
+    <div flex="50">
+      <h2>Chart1</h2>
+      <div class="graph-container">
+        <canvas id="chart1" class="chart chart-bar" 
+          chart-data="chart1.data"
+          chart-labels="chart1.labels" 
+          chart-legend="false" 
+          chart-series="chart1.series"
+          >
+        </canvas> 
+      </div>
+    </div>
+    <div flex="50">
+      <h2>Chart2</h2>
+      <div class="graph-container">
+        <canvas id="chart2" class="chart chart-line" 
+          chart-data="chart2.data"
+          chart-labels="chart2.labels" 
+          chart-legend="false" 
+          chart-series="chart2.series"
+          >
+        </canvas> 
+      </div>
+    </div>
+  </div>
+
+  <div layout="row" class="heading">
+    <h2>Item Details</h2>
+  </div>
+  <div flex layout="row">
+    <div flex="20" class="select-items" layout="column">
+      <div layout="column" layout-wrap class="item-selector">
+        <div ng-repeat="item in items">
+          <md-card class="item-card" ng-class="{selected: item.item_id == selected_item.item_id" ng-click="setSelectedItem(item)">
+            <md-card-content>
+              <h2 class="md-title">{{ item.name }}</h2>
+              <span class="left">Info 1</span>
+              <span class="right">Info 2</span>
+            </md-card-content>
+          </md-card>
+        </div>
+      </div>
+    </div>
+
+    <div flex="80" class="item-details" layout="column">
+      <div layout="row" class="image-stats">
+        <div flex="35" class="item-image">
+          <img ng-src="{{ SERVER_URL }}/api/items/{{ selected_item.item_id }}/image"></img>
+        </div>
+
+        <div flex="65" class="parent">
+          <div layout="column" class="description">
+            <h1>{{selected_item.name}}</h1>
+            <p> {{selected_item.description}}</p>
+          </div>
+          <div layout="row" class="stats-cards">
+            <div flex flex="33">
+              <md-card class="blue">
+                <div>Info1</div>
+                <div class="value">1</div>
+              </md-card>
+            </div>
+            <div flex flex="33" >
+              <md-card class="yellow">
+                <div>Info2</div>
+                <div class="value">2</div>
+              </md-card>
+            </div>
+            <div flex flex="33" >
+              <md-card class="teal">
+                <div>Info3</div>
+                <div class="value">3</div>
+              </md-card>
+            </div>
+          </div>
+
+          <div layout="row" class="progress-bar-summary">
+            <div class="progress-bar-stats">
+              <span class="stats-bold">Some bold info </span> 
+              <span>and some regular info</span>
+            </div>
+          </div><!-- /progress-bar-summary -->
+
+          <div layout="row">
+            <progress class="progress-bar" max="100" value="48"> </progress>
+          </div>
+          <div layout="row">
+            <ul class="detailed-stats">
+              <li>
+                <div class="stats-value">42%</div>
+                <span class="stats-label">progress</span>
+              </li>
+              <li>
+                <div class="stats-value">32</div>
+                <span class="stats-label">amount</span>
+              </li>
+              <li>
+                <div class="stats-value">22</div>
+                <span class="stats-label">features</span>
+              </li>
+            </ul>
+          </div><!-- /stats for progress bar -->
+        </div>
+      </div>
+
+      <div layout="row">
+        <div flex="50">
+          <h2>Chart3</h2>
+          <div class="graph-container">
+            <canvas id="chart3" class="chart chart-bar" 
+              chart-data="chart3.data"
+              chart-labels="chart3.labels" 
+              chart-legend="false" 
+              chart-series="chart3.series"
+              >
+            </canvas> 
+          </div>
+        </div>
+        <div flex="50">
+          <h2>Chart4</h2>
+          <div class="graph-container">
+            <canvas id="chart4" class="chart chart-line" 
+              chart-data="chart4.data"
+              chart-labels="chart4.labels" 
+              chart-legend="false" 
+              chart-series="chart4.series"
+              >
+            </canvas> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--
+
+  <md-grid-tile class="gray"
+      md-rowspan="2" md-colspan="4" md-colspan-md="2" md-colspan-sm="1">
+
+      <md-grid-tile-header>
+        <h3>Summary Statistics</h3>
+      </md-grid-tile-header>
+
+      <md-grid-tile-footer>
+        <h3>Bottom</h3>
+      </md-grid-tile-footer>
+
+  </md-grid-tile>
+
+  <md-grid-tile class="gray"
+      md-rowspan="4" md-colspan="2" md-colspan-sm="1">
+
+      <md-grid-tile-header>
+        <h3>Google Map</h3>
+      </md-grid-tile-header>
+
+      <md-grid-tile-footer>
+        <h3>Bottom</h3>
+      </md-grid-tile-footer>
+
+  </md-grid-tile>
+
+
+  <md-grid-tile class="gray"
+      md-rowspan="2" md-colspan="2" md-colspan-sm="1">
+
+      <md-grid-tile-header>
+        <h3>Driving Trips Per Day</h3>
+      </md-grid-tile-header>
+
+      <md-grid-tile-footer>
+        <h3>Bottom</h3>
+      </md-grid-tile-footer>
+
+  </md-grid-tile>
+
+  <md-grid-tile class="gray"
+      md-rowspan="2" md-colspan="2" md-colspan-sm="1">
+
+      <md-grid-tile-header>
+        <h3>Cumulative Pledges Per Day</h3>
+      </md-grid-tile-header>
+
+      <md-grid-tile-footer>
+        <h3>Bottom</h3>
+      </md-grid-tile-footer>
+
+  </md-grid-tile>
+
+-->
+
