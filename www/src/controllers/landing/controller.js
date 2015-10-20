@@ -23,44 +23,43 @@ angular.module(MODULE_NAME, ['ngRoute'])
     var SERVER_URL = CLIENT_SETTINGS.SERVER_URL;
 
     $scope.SERVER_URL = SERVER_URL;
-    $scope.items = [];
-    $scope.selected_item = {}
+    $scope.categories = [];
+    $scope.selected_category = {}
     $scope.summary = {};
     $scope.chart1 = {};
     $scope.chart2 = {};
     $scope.chart3 = {};
     $scope.chart4 = {};
 
-    $scope.setSelectedItem = function(item) {
-      $scope.selected_item = item;
+    $scope.setSelectedCategory = function(category) {
+      $scope.selected_category = category;
 
-      $http.get(SERVER_URL+'/api/dashboard/chart3/'+item.item_id).then(function(resp){
+      $http.get(SERVER_URL+'/api/dashboard/categories/'+category.name+'/issue_chart').then(function(resp){
         $scope.chart3 = resp.data;
       });
 
-      $http.get(SERVER_URL+'/api/dashboard/chart4/'+item.item_id).then(function(resp){
+      $http.get(SERVER_URL+'/api/dashboard/categories/'+category.name+'/volunteer_chart').then(function(resp){
         $scope.chart4 = resp.data;
       });
 
     }
 
-    $http.get(SERVER_URL+'/api/dashboard/items').then(function(resp){
-      $scope.items = resp.data;
-      $scope.setSelectedItem($scope.items[0]);
+    $http.get(SERVER_URL+'/api/dashboard/categories').then(function(resp){
+      $scope.categories = resp.data;
+      $scope.setSelectedCategory($scope.categories[0]);
     });
 
     $http.get(SERVER_URL+'/api/dashboard/summary').then(function(resp){
       $scope.summary = resp.data;
     });
 
-    $http.get(SERVER_URL+'/api/dashboard/chart1').then(function(resp){
+    $http.get(SERVER_URL+'/api/dashboard/issue_chart').then(function(resp){
       $scope.chart1 = resp.data;
     });
 
-    $http.get(SERVER_URL+'/api/dashboard/chart2').then(function(resp){
+    $http.get(SERVER_URL+'/api/dashboard/volunteer_chart').then(function(resp){
       $scope.chart2 = resp.data;
     });
-    
 
     
   });

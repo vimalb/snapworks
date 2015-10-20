@@ -171,6 +171,8 @@ def items_messages(item_id):
     if request.method in ['POST']:
         req = json.loads(request.get_data())
         req['item_id'] = item_id
+        item = MONGO_DB.items.find_one({'_id': ObjectId(item_id)})
+        req['issue_type'] = item['issue_type']
         inserted_id = MONGO_DB.messages.insert_one(req).inserted_id
     resp = [_clean_message(message) for message in MONGO_DB.messages.find({'item_id': item_id}).sort("timestamp",pymongo.DESCENDING)]
     return Response(json.dumps(resp), mimetype='application/json')
@@ -213,6 +215,133 @@ def get_item_map(item):
 def item_map(item_id):
     item = _clean_item(MONGO_DB.items.find_one({'_id': ObjectId(item_id)}))
     return Response(get_item_map(item), mimetype='image/png')
+
+@app.route("/api/dashboard/categories", methods=['GET'])
+def dashboard_categories():
+    item_counts = {}
+    for item_count in MONGO_DB.items.aggregate([ {"$group" : {'_id':"$issue_type",
+                                                        'count':{ '$sum':1},
+                                                       }} ]):
+        item_counts[item_count['_id']] = item_count['count']
+
+    volunteer_counts = {}
+    for volunteer_count in MONGO_DB.messages.aggregate([ {"$match": {'volunteer': True} },
+                                                    {"$group" : {'_id':"$issue_type",
+                                                        'count':{ '$sum':1},
+                                                       }} ]):
+        volunteer_counts[volunteer_count['_id']] = volunteer_count['count']
+
+
+    resp = [ {  'name': issue_type,
+                'item_count': item_counts.get(issue_type, 0),
+                'volunteer_count': volunteer_counts.get(issue_type, 0),
+                }
+            for issue_type in ['graffiti', 'trash', 'pothole', 'poop', 'other']]
+    return Response(json.dumps(resp), mimetype='application/json')
+
+
+def get_items_map(items):
+    map_url = 'https://maps.googleapis.com/maps/api/staticmap'
+    map_params = {'size': '330x350',
+                  'markers': [ 'icon:'+ICON_URLS.get(item['issue_type'],ICON_URLS['default'])+'|'+coord_to_str(item['location']) for item in items],
+                  'key': GOOGLE_API_KEY,
+                  }
+    resp = requests.get(map_url, map_params)
+    return resp.content
+
+
+@app.route("/api/dashboard/categories/<category>/map", methods=['GET'])
+def dashboard_category_map(category):
+    items = list(MONGO_DB.items.find({'issue_type': category}))
+
+    return Response(get_items_map(items), mimetype='image/png')
+
+
+
+def get_issue_chart(category=None):
+    today = utcnow().date()
+    issue_chart = { 'series': ['item_count'],
+                   'labels': [],
+                   'data': [[]],
+                   }
+
+    issue_date_counts = Counter([ item['timestamp'][:10] for item in MONGO_DB.items.find({'issue_type': category} if category is not None else {}, {'timestamp': 1}) ])
+    for day_offset in range(-28,1,1):
+        ref_day = today + timedelta(days=day_offset)
+        ref_day_str = ref_day.isoformat()[:10]
+        if ref_day_str in issue_date_counts:
+            issue_chart['data'][0].append(issue_date_counts[ref_day_str])
+            del issue_date_counts[ref_day_str]
+        else:
+            issue_chart['data'][0].append(0)
+        issue_chart['labels'].append(ref_day.strftime('%b %d'))
+
+    pledge_total = sum(issue_date_counts.values())
+    for i in range(len(issue_chart['data'][0])):
+        issue_chart['data'][0][i] = issue_chart['data'][0][i] + pledge_total
+        pledge_total = issue_chart['data'][0][i]
+    
+    for i in range(len(issue_chart['labels'])):
+        if i%4 != 0:
+            issue_chart['labels'][i] = ""
+
+    return issue_chart
+
+
+def get_volunteer_chart(category=None):
+    today = utcnow().date()
+    issue_chart = { 'series': ['item_count'],
+                   'labels': [],
+                   'data': [[]],
+                   }
+
+    issue_date_counts = Counter([ item['timestamp'][:10] for item in MONGO_DB.messages.find({'issue_type': category, 'volunteer': True} if category is not None else {'volunteer': True}, {'timestamp': 1}) ])
+    for day_offset in range(-28,1,1):
+        ref_day = today + timedelta(days=day_offset)
+        ref_day_str = ref_day.isoformat()[:10]
+        if ref_day_str in issue_date_counts:
+            issue_chart['data'][0].append(issue_date_counts[ref_day_str])
+            del issue_date_counts[ref_day_str]
+        else:
+            issue_chart['data'][0].append(0)
+        issue_chart['labels'].append(ref_day.strftime('%b %d'))
+
+    pledge_total = sum(issue_date_counts.values())
+    for i in range(len(issue_chart['data'][0])):
+        issue_chart['data'][0][i] = issue_chart['data'][0][i] + pledge_total
+        pledge_total = issue_chart['data'][0][i]
+    
+    for i in range(len(issue_chart['labels'])):
+        if i%4 != 0:
+            issue_chart['labels'][i] = ""
+
+    return issue_chart
+
+
+@app.route("/api/dashboard/summary", methods=['GET'])
+def dashboard_summary():
+    resp = {'item_count': MONGO_DB.items.find({}).count(),
+            'volunteer_count': MONGO_DB.messages.find({'volunteer': True}).count(),
+            'user_count':  MONGO_DB.users.find({}).count(),
+            }
+    return Response(json.dumps(resp), mimetype='application/json')
+
+
+@app.route("/api/dashboard/issue_chart", methods=['GET'])
+def dashboard_issue_chart():
+    return Response(json.dumps(get_issue_chart()), mimetype='application/json')
+
+@app.route("/api/dashboard/categories/<category>/issue_chart", methods=['GET'])
+def dashboard_category_issue_chart(category):
+    return Response(json.dumps(get_issue_chart(category)), mimetype='application/json')
+
+@app.route("/api/dashboard/volunteer_chart", methods=['GET'])
+def dashboard_volunteer_chart():
+    return Response(json.dumps(get_volunteer_chart()), mimetype='application/json')
+
+@app.route("/api/dashboard/categories/<category>/volunteer_chart", methods=['GET'])
+def dashboard_category_volunteer_chart(category):
+    return Response(json.dumps(get_volunteer_chart(category)), mimetype='application/json')
 
 
 @app.route("/api/reset", methods=['GET'])
