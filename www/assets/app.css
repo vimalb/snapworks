@@ -29,6 +29,18 @@ html, body {
   margin-right: 10px;
 }
   
+.stats {
+  font-weight: 500;
+  color: #607D8B;
+}
+
+h1::first-letter {
+  text-transform: capitalize;
+}
+
+h2.md-title {
+  margin: 8px 0px;
+}
 
 /* colors */
 .light-blue {

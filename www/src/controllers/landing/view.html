@@ -80,8 +80,8 @@
             <md-card-content>
               <img ng-src="/assets/icons/issue-{{ category.name }}.png"></img>
               <h2 class="md-title">{{ category.name }}</h2>
-              <span class="left">{{ category.item_count }} issues</span>
-              <span class="right">{{ category.volunteer_count }} volunteers</span>
+              <span class="left stats">{{ category.item_count }} issues</span>
+              <span class="right stats">{{ category.volunteer_count }} volunteers</span>
             </md-card-content>
           </md-card>
         </div>
@@ -96,7 +96,7 @@
 
         <div flex="65" class="parent">
           <div layout="column" class="description">
-            <h1>{{ selected_category.name | uppercase }}</h1>
+            <h1 class="first-letter">{{ selected_category.name }}</h1>
           </div>
           <div layout="row" class="stats-cards">
             <div flex flex="50">
@@ -106,9 +106,8 @@
               </md-card>
             </div>
           </div>
-
           <div layout="row" class="stats-cards">
-            <div flex flex="50" >
+            <div flex flex="50">
               <md-card class="teal">
                 <div>Cleanups Volunteered</div>
                 <div class="value">{{ selected_category.volunteer_count }}</div>
