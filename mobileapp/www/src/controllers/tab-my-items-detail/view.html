@@ -3,7 +3,7 @@
   <ion-content class="padding route-detail">
     <!-- route title, should this be constructed? -->
     <div class="name">
-      <h3>{{ item.issue_type }}</h3>
+      <h3>{{ item.issue_type | uppercase }}</h3>
     </div>
     <!-- route summary -->
     <img class="trip-map-summary" ng-src="{{ item.photo }}" >
