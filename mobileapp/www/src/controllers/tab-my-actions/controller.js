@@ -45,15 +45,15 @@ angular.module(MODULE_NAME, ['ionic'])
     }
 
     $scope.refreshItems = function() {
-      /*itemSearchService.getNearbyItems().then(function(items) {
+      itemSearchService.getNearbyItems().then(function(items) {
         $scope.items = items;
-      });*/
+      });
 
-      /* delete after testing */
-      itemSearchService.getMyItems().then(function(items) {
+      /* begin delete region */
+      /*itemSearchService.getMyItems().then(function(items) {
         $scope.items = items;
         console.log('my items', items);
-      });
+      });*/
       /* end delete region */
     }
 

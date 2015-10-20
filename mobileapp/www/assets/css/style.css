@@ -62,11 +62,6 @@ img.trip-map-summary {
 
 .login.button {
   margin: 10px auto;
-  /*background-color: #80D8FF;
-  color: black;
-  border-color: #03A9F4;*/
-  /*background-color: #B3E5FC;
-  color: black;*/
 }
 
 
@@ -89,7 +84,7 @@ img.trip-map-summary {
 .thanks {
   font-size: 1.5em;
   font-weight: 500;
-  color: #00E676;
+  color: #4CAF50;
 }
 
 .report-type {
