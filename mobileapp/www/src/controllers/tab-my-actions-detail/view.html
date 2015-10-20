@@ -18,8 +18,8 @@
       <a class="item item-avatar" ng-repeat="message in messages" href="#">
         <!-- XXX replace with user profile -->
         <!--img class="profile-img" ng-src="{{message.user_profile}}"-->
-        <img class="profile-img" src="assets/img/profile_pic.png">
-        <h2>{{ message.username }}</h2>
+        <img class="profile-img" ng-src="{{ message.user.photo_url }}">
+        <h2>{{ message.user.username }}</h2>
         <p>{{message.text}}</p>
       </a>
     </div> 

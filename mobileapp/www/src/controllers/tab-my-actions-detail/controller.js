@@ -35,6 +35,7 @@ angular.module(MODULE_NAME, ['ionic', 'ngCordova'])
       $scope.loadMessages = function() {
         itemSearchService.getMessages($scope.item.item_id).then(function(messages) {
           $scope.messages = messages;
+          console.log(messages);
         });
       }
 

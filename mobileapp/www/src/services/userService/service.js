@@ -23,9 +23,12 @@ angular.module(MODULE_NAME, [])
       }
 
       $rootScope.currentUser = JSON.parse(localStorage.getItem('currentUser') || JSON.stringify({
-        'name': '',
+        'username': '',
         'photo_url': '',
       }));
+      if(!$rootScope.currentUser.username) {
+        $rootScope.currentUser.username = 'Anonymous';
+      }
       if(!$rootScope.currentUser.user_id) {
         $rootScope.currentUser.user_id = rand4()+rand4()+rand4()+rand4();
       }

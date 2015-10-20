@@ -113,11 +113,14 @@ def _clean_item(item):
 @app.route("/api/users/<user_id>/items", methods=['GET','POST'])
 def items_info(user_id):
     if request.method in ['GET']:
-        items = [_clean_item(item) for item in MONGO_DB.items.find({'user_id': user_id})]
+        items = [_clean_item(item) for item in MONGO_DB.items.find({'user.user_id': user_id})]
         return Response(json.dumps(items), mimetype='application/json')
     elif request.method in ['POST']:
         req = json.loads(request.get_data())
-        req['user_id'] = user_id
+        req['user'] = MONGO_DB.users.find_one({'user_id': user_id})
+        del req['user']['_id']
+
+        req['volunteer_timestamp'] = (utcnow() + timedelta(days=random.uniform(5,10))).isoformat()
 
         try:
             if req.get('location'):
@@ -157,6 +160,7 @@ def items_nearby():
                 'type': "Point" ,
                 'coordinates': [ req['longitude'], req['latitude'] ]
              } } } } ).limit(10)]
+        resp.sort(key=lambda x: x['volunteer_timestamp'])
         return Response(json.dumps(resp), mimetype='application/json')
 
 
@@ -176,6 +180,64 @@ def items_messages(item_id):
         inserted_id = MONGO_DB.messages.insert_one(req).inserted_id
     resp = [_clean_message(message) for message in MONGO_DB.messages.find({'item_id': item_id}).sort("timestamp",pymongo.DESCENDING)]
     return Response(json.dumps(resp), mimetype='application/json')
+
+@app.route("/api/users/<user_id>/item_statuses", methods=['POST'])
+def items_statuses(user_id):
+    if request.method in ['POST']:
+        item_ids = json.loads(request.get_data())
+
+        message_counts = {}
+        for message_count in MONGO_DB.messages.aggregate([ 
+                                                            {"$group" : {'_id':"$item_id",
+                                                            'count':{ '$sum':1},
+                                                            }} ]):
+            message_counts[message_count['_id']] = message_count['count']
+
+
+        volunteer_counts = {}
+        for volunteer_count in MONGO_DB.messages.aggregate([ {"$match": {'volunteer': True} },
+                                                            {"$group" : {'_id':"$item_id",
+                                                            'count':{ '$sum':1},
+                                                            }} ]):
+            volunteer_counts[volunteer_count['_id']] = volunteer_count['count']
+
+        like_counts = {}
+        for like_count in MONGO_DB.messages.aggregate([ {"$match": {'like': True} },
+                                                            {"$group" : {'_id':"$item_id",
+                                                            'count':{ '$sum':1},
+                                                            }} ]):
+            like_counts[like_count['_id']] = like_count['count']
+
+
+        self_volunteer_counts = {}
+        for volunteer_count in MONGO_DB.messages.aggregate([ {"$match": {'volunteer': True, 'user.user_id': user_id} },
+                                                            {"$group" : {'_id':"$item_id",
+                                                            'count':{ '$sum':1},
+                                                            }} ]):
+            self_volunteer_counts[volunteer_count['_id']] = volunteer_count['count']
+
+        self_like_counts = {}
+        for like_count in MONGO_DB.messages.aggregate([ {"$match": {'like': True, 'user.user_id': user_id} },
+                                                            {"$group" : {'_id':"$item_id",
+                                                            'count':{ '$sum':1},
+                                                            }} ]):
+            self_like_counts[like_count['_id']] = like_count['count']
+
+        resp = {'message_counts': {},
+                'volunteer_counts': {},
+                'like_counts': {},
+                'self_volunteer': {},
+                'self_like': {},
+                }
+        for item_id in item_ids:
+            resp['message_counts'][item_id] = message_counts.get(item_id, 0)
+            resp['volunteer_counts'][item_id] = volunteer_counts.get(item_id, 0)
+            resp['like_counts'][item_id] = like_counts.get(item_id, 0)
+            resp['self_volunteer'][item_id] = self_volunteer_counts.get(item_id, 0) > 0
+            resp['self_like'][item_id] = self_like_counts.get(item_id, 0) > 0
+
+        return Response(json.dumps(resp), mimetype='application/json')
+
 
 
 ICON_URLS = {
@@ -350,11 +412,12 @@ def reset():
         return Response(json.dumps({'status': 'reset ignored'}), mimetype='application/json')
 
     MONGO_DB.users.drop()
-    MONGO_DB.users.create_index('user_id')
+    MONGO_DB.users.create_index('user.user_id')
 
     MONGO_DB.messages.drop()
-    MONGO_DB.messages.create_index('user_id')
+    MONGO_DB.messages.create_index('user.user_id')
     MONGO_DB.messages.create_index('item_id')
+    MONGO_DB.messages.create_index('issue_type')
 
 
     MONGO_DB.items.drop()
@@ -409,16 +472,18 @@ def reset():
     user_profiles = []
     for i in range(53):
         user_profiles.append({'user_id': 'demo'+str(len(user_profiles) + 1),
-                              'name': random.choice(men_names),
+                              'username': random.choice(men_names),
                               'photo_url': WWW_SERVER_URL+'/profiles/man'+str(i%50)+'.jpg'
                               })
     for i in range(54):
         user_profiles.append({'user_id': 'demo'+str(len(user_profiles) + 1),
-                              'name': random.choice(women_names),
+                              'username': random.choice(women_names),
                               'photo_url': WWW_SERVER_URL+'/profiles/woman'+str(i%50)+'.jpg'
                               })
 
     MONGO_DB.users.insert_many(user_profiles)
+    for user in user_profiles:
+        del user['_id']
 
     random.shuffle(user_profiles)
 
@@ -433,11 +498,12 @@ def reset():
         elif i < 16:
             issue_type = 'poop'
 
-        req = {'user_id': user_profiles[i]['user_id'],
+        req = {'user': user_profiles[i],
                 'photo': WWW_SERVER_URL+'/assets/images/'+issue_type+'_'+str((i%5)+1)+'.jpg',
                 'issue_type': issue_type,
                 'location': locations[i],
                 'timestamp': (utcnow() - timedelta(days=random.uniform(1,15))).isoformat(),
+                'volunteer_timestamp': (utcnow() + timedelta(days=random.uniform(10,15))).isoformat(),
                 'coord': [locations[i]['longitude'], locations[i]['latitude']],
                 }
         items.append(req)

@@ -25,10 +25,11 @@ angular.module(MODULE_NAME, ['ionic'])
         }
       });
   })
-  .controller(CONTROLLER_NAME, function($scope, itemSearchService, $state, CLIENT_SETTINGS) {
+  .controller(CONTROLLER_NAME, function($scope, itemSearchService, userService, $state, CLIENT_SETTINGS) {
     console.log("Instantiating controller", CONTROLLER_NAME);
 
     $scope.items = [];
+    $scope.item_statuses = {};
     $scope.SERVER_URL = CLIENT_SETTINGS.SERVER_URL;
 
     $scope.init = function() {
@@ -47,6 +48,11 @@ angular.module(MODULE_NAME, ['ionic'])
     $scope.refreshItems = function() {
       itemSearchService.getNearbyItems().then(function(items) {
         $scope.items = items;
+        var item_ids = _.map(items, function(item) {return item.item_id});
+        itemSearchService.getItemStatuses(item_ids).then(function(statuses) {
+          $scope.item_statuses = statuses;
+          console.log($scope.item_statuses);
+        });
       });
     }
 
@@ -57,6 +63,27 @@ angular.module(MODULE_NAME, ['ionic'])
     $scope.goItemDetail = function(itemId) {
       $state.go('tab.my-actions-detail', {itemId: itemId});
     }
+
+    $scope.likeItem = function(itemId) {
+      if(!$scope.item_statuses.self_like[itemId]) {
+        itemSearchService.sendMessage(itemId, {'like': true, 'text':'Liked this'}).then(function() {
+          $scope.item_statuses.self_like[itemId] = true;
+          $scope.item_statuses.like_counts[itemId] = $scope.item_statuses.like_counts[itemId] + 1;
+          $scope.item_statuses.message_counts[itemId] = $scope.item_statuses.message_counts[itemId] + 1;
+        });
+      }
+    }
+
+    $scope.volunteerItem = function(itemId) {
+      if(!$scope.item_statuses.self_volunteer[itemId]) {
+        itemSearchService.sendMessage(itemId, {'volunteer': true, 'text':'Volunteered to help fix this!'}).then(function() {
+          $scope.item_statuses.self_volunteer[itemId] = true;
+          $scope.item_statuses.volunteer_counts[itemId] = $scope.item_statuses.volunteer_counts[itemId] + 1;
+          $scope.item_statuses.message_counts[itemId] = $scope.item_statuses.message_counts[itemId] + 1;
+        });
+      }
+    }
+
 
   })
 })();

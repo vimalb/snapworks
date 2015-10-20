@@ -495,3 +495,8 @@ img.trip-map-summary {
 .pledges-detail .details .detailed-stats li .stats-label {
   color: darkgray;
 }
+
+i.action-completed {
+    color: #03A9F4;
+}
+

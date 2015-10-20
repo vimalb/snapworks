@@ -87,6 +87,17 @@ angular.module(MODULE_NAME, [])
           return deferred.promise;
         },
 
+        getItemStatuses: function(itemIds) {
+          console.log("Fetching item statuses", itemIds);
+          var deferred = $q.defer();
+          var url = CLIENT_SETTINGS.SERVER_URL + '/api/users/' + userService.getCurrentUser().user_id + '/item_statuses';
+          $http.post(url, JSON.stringify(itemIds)).then(function(resp) {
+            deferred.resolve(resp.data);
+          });
+          return deferred.promise;
+        },
+
+
         getMessages: function(itemId) {
           console.log("Fetching messages for item", itemId);
           var deferred = $q.defer();

@@ -1,56 +1,47 @@
 <ion-view>
   <ion-nav-title>
     <img class="header-logo-left" src="assets/img/logo-white.png"></img>
-    Volunteer
+    Volunteer Opportunities
   </ion-nav-title>
   <ion-content class="padding pledges">
-    <button ng-show="!currentUser.access_token" id="login-button" class="login button button-full button-calm" ng-click="goLogin()">Sign in</button>
+    <!-- <button ng-show="!currentUser.access_token" id="login-button" class="login button button-full button-calm" ng-click="goLogin()">Sign in</button> -->
 
-    <h2>Nearby Issues</h2>
     <div class="item item-divider section">
-      This Week
+      Upcoming
     </div>
 
     <div class="list">
-      <div class="card" ng-repeat="item in items" ng-click="goItemDetail(item.item_id)">
-        <div class="item item-avatar">
-          <img class="profile-img" src="assets/img/profile_pic.png">
+      <div class="card" ng-repeat="item in items">
+        <div class="item item-avatar" ng-click="goItemDetail(item.item_id)">
+          <img class="profile-img" ng-src="{{ item.user.photo_url }}">
           <h2>{{ item.issue_type }} cleanup</h2>
-          <p>Tuesday</p>
+          <p>{{ item.volunteer_timestamp | date : "EEEE, M/d" }}</p>
         </div><!-- /item item-avatar -->
 
-        <div class="item item-body" ng-init="showComments=false">
+        <div class="item item-body" ng-click="goItemDetail(item.item_id)">
           <img class="full-image" ng-src="{{ item.photo }}">
-          <p>Hi everyone!<br> We are planning to get together and clean up the hill behind the Bart station. Come if you can! </p>
           <p>
             <a href="#" class="subdued"> 
-              4 <icon class="ion-person-stalker"></icon>
+              {{ item_statuses.volunteer_counts[item.item_id] }} <icon class="ion-person-stalker"></icon>
             </a>
-            <a href="#" class="subdued">10 Likes </a>
-            <a href="#" class="subdued">5 Comments</a>
+            <a href="#" class="subdued">{{ item_statuses.like_counts[item.item_id] }} Likes </a>
+            <a href="#" class="subdued">{{ item_statuses.message_counts[item.item_id] }} Comments</a>
             <!--a href="#" class="subdued" ng-click="showComments=!showComments;$event.stopPropagation()">5 Comments</a-->
           </p> 
-          <div class="check-element animate-show" ng-show="showComments">
-            <div class="list">
-              <a class="item item-avatar" ng-repeat="message in messages" href="#">
-                <img class="profile-img" src="assets/img/profile_pic.png">
-                <h2>{{ message.username }}</h2>
-                <p>{{message.text}}</p>
-              </a>
-            </div> 
-          </div>
         </div><!-- /item-body -->
 
         <div class="item tabs tabs-secondary tabs-icon-left volunteer-actions">
-          <a class="tab-item" href="#">
-            <i class="icon ion-ios-body"></i>
-            Join
+          <a class="tab-item" ng-click="volunteerItem(item.item_id)">
+              <span ng-show="!item_statuses.self_volunteer[item.item_id]"><i class="icon ion-ios-body"></i>Join</span>
+              <span ng-show="item_statuses.self_volunteer[item.item_id]"><i class="icon ion-ios-body action-completed"></i>Joined</span>
           </a>
-          <a class="tab-item" href="#">
-            <i class="icon ion-thumbsup"></i>
-            Like
+
+          <a class="tab-item" ng-click="likeItem(item.item_id)">
+            <span ng-show="!item_statuses.self_like[item.item_id]"><i class="icon ion-thumbsup"></i>Like</span>
+            <span ng-show="item_statuses.self_like[item.item_id]"><i class="icon ion-thumbsup action-completed"></i>Liked</span>
           </a>
-          <a class="tab-item" href="#">
+
+          <a class="tab-item" ng-click="goItemDetail(item.item_id)">
             <i class="icon ion-chatbox"></i>
             Comment
           </a>
