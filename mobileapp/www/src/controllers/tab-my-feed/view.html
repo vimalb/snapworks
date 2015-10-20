@@ -4,55 +4,90 @@
       Snapworks
   </ion-nav-title>
   <ion-content class="padding item-feed">
-  	<div ng-show="state == 'taking_photo'">
+    <div class="picture" ng-show="state == 'taking_photo'">
+      <ng-camera
+        type="photo"
+        enabled="cameraInfo.isEnabled"
+        width="320"
+        height="240"
+        countdown="0"
+        ng-model="cameraInfo.photo"
+        switch-camera="cameraInfo.switchCamera"
+        take-picture="cameraInfo.takePicture"
+        capture="onSnapshotTaken(media)"
+        ></ng-camera>
 
-		<ng-camera
-		  type="photo"
-		  enabled="cameraInfo.isEnabled"
-		  width="320"
-		  height="240"
-		  countdown="0"
-		  ng-model="cameraInfo.photo"
-		  switch-camera="cameraInfo.switchCamera"
-		  take-picture="cameraInfo.takePicture"
-		  capture="onSnapshotTaken(media)"
-		  ></ng-camera>
-
-	  	<button id="snapshot-button" class="button button-full button-calm" ng-click="switchCam()">Switch Camera</button>
-
-      <button id="snapshot-button" class="button button-full button-calm" ng-click="takeSnapshot()">
+      <button id="snapshot-button" class="button button-full button-positive" ng-click="takeSnapshot()">
         <icon class="ion-ios-camera"></icon>
-        <span>Fix It!</span>
+        <span>Capture It!</span>
       </button>
-	</div>
-	<div ng-show="state == 'choosing_issue'">
-		<img ng-src="{{ photoInfo }}"></img>
-    <button class="button button-full button-calm" ng-click="reportIssue('litter')">
-      <span>Report Trash</span>
-      <icon class="report-type ion-trash-a"></icon>
-    </button>
-    <button class="button button-full button-calm" ng-click="reportIssue('graffiti')">
-      <span>Report Graffiti</span>
-      <icon class="report-type ion-paintbrush"></icon>
-    </button>
-    <button class="button button-full button-calm" ng-click="reportIssue('other')">
-      <span>Report Other</span>
-      <icon class="report-type ion-help-circled"></icon>
-    </button>
-	</div>
+	  	<button id="snapshot-button" class="button button-full button-dark" ng-click="switchCam()">Switch Camera</button>
+    </div>
+    <div ng-show="state == 'choosing_issue'">
+      <div class="picture">
+        <img ng-src="{{ photoInfo }}"></img>
+      </div>
+      <!-- classify the issue -->
+      <div class="list">
+        <label class="item item-radio">
+          <input type="radio" name="report_type" value="trash">
+          <div class="item-content">
+            Trash
+            <img class="report-type" src="assets/icons/issue-trash.png">
+          </div>
+          <i class="radio-icon ion-checkmark"></i> 
+        </label>
+        <label class="item item-radio">
+          <input type="radio" name="report_type" value="graffiti">
+          <div class="item-content">
+            Graffiti
+            <img class="report-type" src="assets/icons/issue-graffiti.png">
+          </div>
+          <i class="radio-icon ion-checkmark"></i> 
+        </label>
+        <label class="item item-radio">
+          <input type="radio" name="report_type" value="pothole">
+          <div class="item-content">
+            Pothole
+            <img class="report-type" src="assets/icons/issue-pothole.png">
+          </div>
+          <i class="radio-icon ion-checkmark"></i> 
+        </label>
+        <label class="item item-radio">
+          <input type="radio" name="report_type" value="poop">
+          <div class="item-content">
+            Poop
+            <img class="report-type" src="assets/icons/issue-poop.png">
+          </div>
+          <i class="radio-icon ion-checkmark"></i> 
+        </label>
+        <label class="item item-radio">
+          <input type="radio" name="report_type" value="other">
+          <div class="item-content">
+            Other
+            <img class="report-type" src="assets/icons/issue-other.png">
+          </div>
+          <i class="radio-icon ion-checkmark"></i> 
+        </label>
+      </div>
+      <button class="button button-full button-positive" ng-click="reportIssue()">Report Issue!</button>
+    </div>
 
-	<div ng-show="state == 'uploading_issue'">
-		<img ng-src="{{ photoInfo }}"></img>
-    <p class="submitting">
-      Submitting {{ reportedIssue.issue_type }} report...
-    </p>
-	</div>
+    <div ng-show="state == 'uploading_issue'">
+      <div class="picture">
+        <img ng-src="{{ photoInfo }}"></img>
+      </div>
+      <p class="submitting">
+        Submitting {{ reportedIssue.issue_type }} report...
+      </p>
+    </div>
 
-	<div ng-show="state == 'confirming_issue'">
-		<img ng-src="{{ photoInfo }}"></img>
-    <p class="thanks">Thank you for doing your civic duty!</p>
-  </div>
-
+    <div ng-show="state == 'confirming_issue'">
+      <div class="picture">
+        <img ng-src="{{ photoInfo }}"></img>
+      </div>
+      <p class="thanks">Thank you for doing your civic duty!</p>
+    </div>
 
     <br>
   </ion-content>

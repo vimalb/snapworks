@@ -49,7 +49,31 @@
       </div><!-- /card -->
 
     </div><!-- /list -->
-    <br>
+
+    <div class="item item-divider section">
+      Unscheduled Issues
+    </div>
+    <div class="list">
+      <div class="card" ng-repeat="item in items" ng-click="goItemDetail(item.item_id)">
+        <div class="item item-avatar">
+          <img class="profile-img" src="assets/img/profile_pic.png">
+          <h2>{{ item.issue_type }} cleanup</h2>
+        </div><!-- /item item-avatar -->
+
+        <div class="item item-body" ng-init="showComments=false">
+          <img class="full-image" ng-src="{{ item.photo }}">
+          <p>Tell everyone why they should get involved in this project!</p>
+        </div><!-- /item-body -->
+
+        <div class="item tabs tabs-secondary tabs-icon-left volunteer-actions">
+          <a class="tab-item adopt" href="#">
+            <i class="icon ion-chatbox"></i>
+            Adopt this issue!
+          </a>
+        </div><!-- / tabs-secondary -->
+      </div><!-- /card -->
+
+    </div><!-- /list -->
 
   </ion-content>
 

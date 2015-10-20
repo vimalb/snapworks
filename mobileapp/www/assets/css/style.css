@@ -78,17 +78,26 @@ img.trip-map-summary {
 
 .submitting {
   font-size: 1.5em;
+  font-weight: 600;
   font-style: italic;
+  color: #607D8B;
+  text-align: center;
 }
 
 .thanks {
   font-size: 1.5em;
   font-weight: 500;
   color: #4CAF50;
+  text-align: center;
 }
 
+.picture {
+  margin: 0 auto;
+  text-align: center;
+}
+ 
 .report-type {
-  font-size: 1.5em;
+  width: 30px;
   vertical-align: middle;
 }
 
@@ -100,12 +109,22 @@ img.trip-map-summary {
   margin-top: 1px;
 }
 
-
 .comment_box {
   padding: 7px;
   border: 1px solid #B3E5FC;
 }
 
+.tabs.tabs-secondary .tab-item.adopt {
+  font-size: .8em;
+}
+
+.button-type-container {
+  display: inline; 
+}
+
+.bar .buttons span {
+  color: white;
+}
 /* end this app */
 
 
