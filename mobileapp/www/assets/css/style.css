@@ -106,6 +106,10 @@ img.trip-map-summary {
   border: 1px solid #B3E5FC;
 }
 
+.tabs.tabs-secondary .tab-item.adopt {
+  font-size: .8em;
+}
+
 /* end this app */
 
 
