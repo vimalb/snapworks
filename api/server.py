@@ -368,10 +368,10 @@ def get_volunteer_chart(category=None):
             issue_chart['data'][0].append(0)
         issue_chart['labels'].append(ref_day.strftime('%b %d'))
 
-    pledge_total = sum(issue_date_counts.values())
-    for i in range(len(issue_chart['data'][0])):
-        issue_chart['data'][0][i] = issue_chart['data'][0][i] + pledge_total
-        pledge_total = issue_chart['data'][0][i]
+    #pledge_total = sum(issue_date_counts.values())
+    #for i in range(len(issue_chart['data'][0])):
+    #    issue_chart['data'][0][i] = issue_chart['data'][0][i] + pledge_total
+    #    pledge_total = issue_chart['data'][0][i]
     
     for i in range(len(issue_chart['labels'])):
         if i%4 != 0:
