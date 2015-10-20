@@ -178,7 +178,7 @@ def items_messages(item_id):
         item = MONGO_DB.items.find_one({'_id': ObjectId(item_id)})
         req['issue_type'] = item['issue_type']
         inserted_id = MONGO_DB.messages.insert_one(req).inserted_id
-    resp = [_clean_message(message) for message in MONGO_DB.messages.find({'item_id': item_id}).sort("timestamp",pymongo.DESCENDING)]
+    resp = [_clean_message(message) for message in MONGO_DB.messages.find({'item_id': item_id}).sort("timestamp",pymongo.ASCENDING)]
     return Response(json.dumps(resp), mimetype='application/json')
 
 @app.route("/api/users/<user_id>/item_statuses", methods=['POST'])
