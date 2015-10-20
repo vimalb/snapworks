@@ -87,8 +87,13 @@ img.trip-map-summary {
   color: #4CAF50;
 }
 
+.picture {
+  margin: 0 auto;
+  text-align: center;
+}
+ 
 .report-type {
-  font-size: 1.5em;
+  width: 30px;
   vertical-align: middle;
 }
 
@@ -100,7 +105,6 @@ img.trip-map-summary {
   margin-top: 1px;
 }
 
-
 .comment_box {
   padding: 7px;
   border: 1px solid #B3E5FC;
@@ -108,6 +112,10 @@ img.trip-map-summary {
 
 .tabs.tabs-secondary .tab-item.adopt {
   font-size: .8em;
+}
+
+.button-type-container {
+  display: inline; 
 }
 
 /* end this app */

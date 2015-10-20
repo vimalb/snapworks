@@ -56,7 +56,8 @@ angular.module(MODULE_NAME, ['ionic', 'ngStorage'])
     }
 
 
-    $scope.reportIssue = function(issueType) {
+    $scope.reportIssue = function() {
+      var issueType = $("input[name=report_type]:checked").val();
       var issue = {'issue_type': issueType,
                    'photo': $scope.photoInfo }
       $scope.state = 'uploading_issue';
@@ -77,28 +78,6 @@ angular.module(MODULE_NAME, ['ionic', 'ngStorage'])
     $scope.$on('$ionicView.beforeLeave', function(){
       $scope.cameraInfo.isEnabled = false;
     });
-
-    /*
-    */
-
-
-    /*
-    $scope.goTripDetail = function(tripId) {
-      $state.go('tab.my-trips-detail', {tripId: tripId});
-    }
-    */
-
-    /*
-    $scope.goRouteDetail = function(feedItem) {
-      var routeId = feedItem.item_details.route.route_id;
-      $timeout(function() {
-        $state.go('tab.my-routes-detail', {routeId: routeId});
-      }, 10);
-      $state.go('tab.my-routes');
-    }
-    */
-
-
 
   })
 
