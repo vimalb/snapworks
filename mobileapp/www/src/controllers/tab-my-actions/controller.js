@@ -58,6 +58,16 @@ angular.module(MODULE_NAME, ['ionic'])
       $state.go('tab.my-actions-detail', {itemId: itemId});
     }
 
+    /*$scope.showItemComments = function(item) {
+      if(item.showComments == true) {
+        item.showComments = false;
+      }
+      else
+      {
+        item.showComments = true;
+      }
+      return item.showComments;
+    }*/
   })
 })();
 
