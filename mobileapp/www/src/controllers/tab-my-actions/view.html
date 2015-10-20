@@ -15,7 +15,7 @@
         <div class="item item-avatar" ng-click="goItemDetail(item.item_id)">
           <img class="profile-img" ng-src="{{ item.user.photo_url }}">
           <h2 class="type-header">{{ item.issue_type }} cleanup</h2>
-          <p>{{ item.volunteer_timestamp | date : "EEEE, M/d" }}</p>
+          <p>{{ item.volunteer_timestamp | date : "EEEE, MMM dd" }}</p>
         </div><!-- /item item-avatar -->
 
         <div class="item item-body" ng-click="goItemDetail(item.item_id)">
@@ -26,7 +26,6 @@
             </a>
             <a href="#" class="subdued">{{ item_statuses.like_counts[item.item_id] }} Likes </a>
             <a href="#" class="subdued">{{ item_statuses.message_counts[item.item_id] }} Comments</a>
-            <!--a href="#" class="subdued" ng-click="showComments=!showComments;$event.stopPropagation()">5 Comments</a-->
           </p> 
         </div><!-- /item-body -->
 
