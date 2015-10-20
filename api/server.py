@@ -17,6 +17,7 @@ from datetime import datetime, timedelta
 import pytz
 import urllib
 from geopy.distance import great_circle
+from geopy.geocoders import Nominatim
 
 from flask import Flask, request, send_from_directory, safe_join, Response
 from flask.ext.cors import CORS
@@ -31,6 +32,8 @@ MONGO_DB = MONGO_CLIENT[urlparse(MONGO_URL).path[1:]]
 GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 
 WWW_SERVER_URL = os.environ['WWW_SERVER_URL']
+
+GEOLOCATOR = Nominatim()
 
 def dump(filename, content):
     dirname = os.path.dirname(filename)
@@ -115,6 +118,13 @@ def items_info(user_id):
     elif request.method in ['POST']:
         req = json.loads(request.get_data())
         req['user_id'] = user_id
+
+        try:
+            if req.get('location'):
+                req['location'].update(GEOLOCATOR.reverse(coord_to_str(req['location'])).raw)
+            print req.get('location')
+        except:
+            pass
         inserted_id = MONGO_DB.items.insert_one(req).inserted_id
         resp = _clean_item(MONGO_DB.items.find_one({'_id': inserted_id}))
         try:
