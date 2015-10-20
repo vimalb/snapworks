@@ -230,6 +230,20 @@ def reset():
     MONGO_DB.items.create_index('user.user_id')
     MONGO_DB.items.create_index([('coord', pymongo.GEOSPHERE)])
 
+
+    user_profiles = []
+    for i in range(53):
+        user_profiles.append({'user_id': 'demo'+str(len(user_profiles) + 1),
+                              'name': random.choice(men_names),
+                              'photo_url': WWW_SERVER_URL+'/profiles/man'+str(i%50)+'.jpg'
+                              })
+    for i in range(54):
+        user_profiles.append({'user_id': 'demo'+str(len(user_profiles) + 1),
+                              'name': random.choice(women_names),
+                              'photo_url': WWW_SERVER_URL+'/profiles/woman'+str(i%50)+'.jpg'
+                              })
+
+    MONGO_DB.users.insert_many(user_profiles)
     
     return Response(json.dumps({'status': 'reset_complete',
                                 'timestamp': utcnow().isoformat(),
