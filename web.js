@@ -80,14 +80,14 @@ app.get('/settings/server', function(req, res){
 
 
 var SHARE_ROUTE_TEMPLATE_FILE = "" + __dirname + "/www/share.html.template";
-app.get('/share/:route_id', function(req, res){
+app.get('/share/:item_id', function(req, res){
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
-  request.get(API_URL+'/api/routes/all/'+req.params.route_id).then(function(data) {
-    route = JSON.parse(data);
-    handlebars.create().engine(SHARE_ROUTE_TEMPLATE_FILE, { route: route,
+  request.get(API_URL+'/api/items/all/'+req.params.item_id).then(function(data) {
+    item = JSON.parse(data);
+    handlebars.create().engine(SHARE_ROUTE_TEMPLATE_FILE, { item: item,
                                                             SERVER_URL: SERVER_URL,
                                                           }, function(err, output) {
       res.write(output);
