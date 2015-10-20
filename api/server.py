@@ -308,6 +308,7 @@ def reset():
                 'photo': WWW_SERVER_URL+'/assets/images/'+issue_type+'_'+str((i%5)+1)+'.jpg',
                 'issue_type': issue_type,
                 'location': locations[i],
+                'timestamp': (utcnow() - timedelta(days=random.uniform(1,15))).isoformat(),
                 'coord': [locations[i]['longitude'], locations[i]['latitude']],
                 }
         items.append(req)
