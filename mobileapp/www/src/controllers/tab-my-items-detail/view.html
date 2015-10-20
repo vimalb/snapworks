@@ -1,22 +1,18 @@
 <ion-view>
-  <ion-nav-title>{{ item.issue_type}} </ion-nav-title>
+  <ion-nav-title class="type-header">Issue: {{item.issue_type}} </ion-nav-title>
   <ion-content class="padding route-detail">
-    <!-- route title, should this be constructed? -->
     <div class="name">
-      <h3>{{ item.issue_type | uppercase }}</h3>
+      <h3 class="type-header">{{ item.issue_type }}</h3>
     </div>
-    <!-- route summary -->
-    <img class="trip-map-summary" ng-src="{{ item.photo }}" >
+    <div class="card">
+      <div class="item item-divider">
+        {{ item.volunteer_timestamp }}
+      </div>
+      <div class="item item-image">
+        <img class="trip-map-summary" ng-src="{{ item.photo }}" >
 
-    <img class="trip-map-summary" ng-src="{{ item.map }}" >
-    <!--
-    <div class="friends">
-      <h4>Friends who have pledged</h4>
-      <div>
-        <img class="avatar" ng-repeat="pic in profiles" src="{{pic}}" >
+        <img class="trip-map-summary" ng-src="{{ item.map }}" >
       </div>
     </div>
-    -->
-
   </ion-content>
 </ion-view>

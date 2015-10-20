@@ -71,6 +71,10 @@ img.trip-map-summary {
  * Feed tab styling
  */
 
+.type-header::first-letter {
+  text-transform: capitalize;
+}
+
 #snapshot-button .ion-ios-camera {
   font-size: 1.5em;
   vertical-align: middle;
