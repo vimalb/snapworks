@@ -121,6 +121,7 @@ def items_info(user_id):
 
         try:
             if req.get('location'):
+                req['coord'] = [req['location']['longitude'], req['location']['latitude']]
                 req['location'].update(GEOLOCATOR.reverse(coord_to_str(req['location'])).raw)
             print req.get('location')
         except:
@@ -151,7 +152,11 @@ def items_nearby():
     if request.method in ['POST']:
         req = json.loads(request.get_data())
         print req
-        resp = [_clean_item(item) for item in MONGO_DB.items.find({})][:10]
+        resp = [_clean_item(item) for item in MONGO_DB.items.find(
+            { 'coord': {'$near': { "$geometry": {
+                'type': "Point" ,
+                'coordinates': [ req['longitude'], req['latitude'] ]
+             } } } } ).limit(10)]
         return Response(json.dumps(resp), mimetype='application/json')
 
 
@@ -223,6 +228,7 @@ def reset():
 
     MONGO_DB.items.drop()
     MONGO_DB.items.create_index('user.user_id')
+    MONGO_DB.items.create_index([('coord', pymongo.GEOSPHERE)])
 
     
     return Response(json.dumps({'status': 'reset_complete',
