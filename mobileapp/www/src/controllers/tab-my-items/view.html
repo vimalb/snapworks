@@ -12,7 +12,7 @@
         <div class="item item-divider header">
           <div class="route-title">
             <span class="left">{{ item.issue_type | uppercase }}</span>
-            <span class="right miles">North Beach, SF</span>
+            <span class="right miles">{{ item.location.address.neighbourhood }}</span>
             <br>{{ item.timestamp | date : "EEEE, M/d" }}
           </div>
         </div><!-- item item-divider header -->

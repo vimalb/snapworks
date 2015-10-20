@@ -5,8 +5,8 @@
 	    <meta name="description" content="">
 	    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 	    <meta property="og:title" content="{{ item.name }}" />
-	    <meta property="og:site_name" content="Skeletor"/>
-	    <meta property="og:description" content="{{ item.description }}" />
+	    <meta property="og:site_name" content="Snapworks"/>
+	    <meta property="og:description" content="Volunteer to clean up {{ item.issue_type }} in {{ item.location.address.neighbourhood }}" />
 	    <meta property="og:image" content="{{ SERVER_URL }}/api/items/{{ item.item_id }}/image" />
 	    <link rel='stylesheet' href='/lib/jquery-ui/jquery-ui.css'>
 	    <link rel='stylesheet' href='/lib/nouislider/jquery.nouislider.css'>
