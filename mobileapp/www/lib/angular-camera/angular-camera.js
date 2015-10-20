@@ -9,8 +9,6 @@
       if(!userService.getCurrentUser().preferredCamera) {
         userService.getCurrentUser().preferredCamera = VIDEO_SOURCES[VIDEO_SOURCES.length - 1];
       }
-
-
       return {
         require: 'ngModel',
         template: '<div class="ng-camera clearfix">        <p ng-hide="isLoaded">Loading Camera...</p>        <p ng-show="noCamera">Couldn\'t find a camera to use</p>        <div class="ng-camera-stack" ng-hide="!isLoaded">          <div class="ng-camera-countdown" ng-show="activeCountdown">            <p class="tick">{{countdownText}}</p>          </div>          <img class="ng-camera-overlay" ng-hide="!overlaySrc" ng-src="{{overlaySrc}}" width="{{width}}" height="{{height}}">          <video id="ng-camera-feed" autoplay width="{{width}}" height="{{height}}" src="{{videoStream}}">Install Browser\'s latest version</video>          <canvas id="ng-photo-canvas" width="{{width}}" height="{{height}}" style="display:none;"></canvas>        </div>        <div class="ng-camera-controls" ng-hide="hideUI">          <!--<button class="btn ng-camera-take-btn" ng-click="takePicture()">Take Picture</button>-->        </div>      </div>',

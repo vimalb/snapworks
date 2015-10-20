@@ -104,6 +104,7 @@ def _clean_item(item):
     item_id = str(item['_id'])
     item['item_id'] = item_id
     del item['_id']
+    item['map'] = WWW_SERVER_URL+'/api/items/all/'+item_id+'/map'
     return item
 
 @app.route("/api/users/<user_id>/items", methods=['GET','POST'])
@@ -116,6 +117,10 @@ def items_info(user_id):
         req['user_id'] = user_id
         inserted_id = MONGO_DB.items.insert_one(req).inserted_id
         resp = _clean_item(MONGO_DB.items.find_one({'_id': inserted_id}))
+        try:
+            get_item_map(resp)
+        except:
+            pass
         return Response(json.dumps(resp), mimetype='application/json')
 
 @app.route("/api/items/all/<item_id>", methods=['GET'])
@@ -156,7 +161,41 @@ def items_messages(item_id):
     return Response(json.dumps(resp), mimetype='application/json')
 
 
+ICON_URLS = {
+    'default': 'http://goo.gl/sWSDFa',
+    'graffiti': 'http://goo.gl/RG2kNl',
+    'trash': 'http://goo.gl/PS4Dor',
+    'other': 'http://goo.gl/8uGb5R',
+    }
 
+def coord_to_str(coord):
+    if type(coord) == list or type(coord) == tuple:
+        return str(coord[0])+','+str(coord[1])
+    else:
+        return str(coord['latitude'])+','+str(coord['longitude'])
+
+def get_item_map(item):
+    map_filename = os.path.join(os.path.dirname(__file__), 'map_cache/item_'+item['item_id']+'.png')
+    if not os.path.exists(map_filename):
+        icon_url = ICON_URLS.get(item['issue_type'],ICON_URLS['default']);            
+        map_url = 'https://maps.googleapis.com/maps/api/staticmap'
+        map_params = {'size': '330x350',
+                      'markers': [ 'icon:'+icon_url+'|'+coord_to_str(item['location']) ],
+                      'key': GOOGLE_API_KEY,
+                      }
+        resp = requests.get(map_url, map_params)
+        if resp.status_code == 200:
+            with open(map_filename, 'wb') as w:
+                w.write(resp.content)
+        print resp.status_code, resp.url
+        sleep(1)        
+    with open(map_filename) as r:
+        return r.read()
+
+@app.route("/api/items/all/<item_id>/map", methods=['GET'])
+def item_map(item_id):
+    item = _clean_item(MONGO_DB.items.find_one({'_id': ObjectId(item_id)}))
+    return Response(get_item_map(item), mimetype='image/png')
 
 
 @app.route("/api/reset", methods=['GET'])

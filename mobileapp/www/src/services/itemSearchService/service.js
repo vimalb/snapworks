@@ -52,8 +52,8 @@ angular.module(MODULE_NAME, [])
           var deferred = $q.defer();
           var url = CLIENT_SETTINGS.SERVER_URL + '/api/items/nearby';
           navigator.geolocation.getCurrentPosition(function (pos) {
-            var location = {'latitude': pos.latitude,
-                             'longitude': pos.longitude,
+            var location = {'latitude': pos.coords.latitude,
+                             'longitude': pos.coords.longitude,
                              'timestamp': (new Date()).toISOString()};
             $http.post(url, JSON.stringify(location)).then(function(resp) {
               deferred.resolve(resp.data);
@@ -67,8 +67,8 @@ angular.module(MODULE_NAME, [])
           var deferred = $q.defer();
           var url = CLIENT_SETTINGS.SERVER_URL + '/api/users/' + userService.getCurrentUser().user_id + '/items';
           navigator.geolocation.getCurrentPosition(function (pos) {
-            item.location = {'latitude': pos.latitude,
-                             'longitude': pos.longitude };
+            item.location = {'latitude': pos.coords.latitude,
+                             'longitude': pos.coords.longitude };
             item.timestamp = (new Date()).toISOString();
             $http.post(url, JSON.stringify(item)).then(function(resp) {
               deferred.resolve(resp.data);
