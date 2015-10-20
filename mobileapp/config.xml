@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.skeletor.mobileapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>Skeletor</name>
+  <name>Snapworks</name>
   <description>
-        Skeleton mobile app
+        Instantly report issues to your local department of public works
     </description>
   <author email="vimal@alum.mit.edu" href="http://cordova.io">
-        Team Skeletor
+        Team Snapworks
     </author>
   <content src="index.html"/>
   <hook src="hooks/renderEnvironment.js" type="before_build"/>
