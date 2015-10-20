@@ -100,6 +100,16 @@ ui-gmap-google-map.trip-map-summary > div.angular-google-map > div.angular-googl
   vertical-align: middle;
 }
 
+.list-type {
+  width: 24px;
+  vertical-align: middle;
+}
+
+.top-row {
+  clear: both;
+  padding-bottom: 5px;
+}
+
 .miles {
   color: #607D8B;
 }

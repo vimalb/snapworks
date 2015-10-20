@@ -11,9 +11,14 @@
       <div class="card" ng-repeat="item in myItems" ng-click="goItemDetail(item.item_id)">
         <div class="item item-divider header">
           <div class="route-title">
-            <span class="left">{{ item.issue_type | uppercase }}</span>
-            <span class="right miles">{{ item.location.address.neighbourhood }}</span>
-            <br>{{ item.timestamp | date : "EEEE, MMM dd" }}
+            <div class="top-row">
+              <span class="left">
+                <img class="list-type" src="assets/icons/issue-{{item.issue_type}}.png">
+              </span>
+              <span class="left">{{ item.issue_type | uppercase }}</span>
+              <span class="right miles">{{ item.location.address.neighbourhood }}</span>
+            </div><br>
+            <div>{{ item.timestamp | date : "EEEE, MMM dd" }}</div>
           </div>
         </div><!-- item item-divider header -->
         <div class="item item-image">

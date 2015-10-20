@@ -14,7 +14,12 @@
       <div class="card" ng-repeat="item in items">
         <div class="item item-avatar" ng-click="goItemDetail(item.item_id)">
           <img class="profile-img" ng-src="{{ item.user.photo_url }}">
-          <h2 class="type-header">{{ item.issue_type }} cleanup</h2>
+          <h2 class="type-header">
+            {{ item.issue_type }} cleanup
+            <span class="left">
+              <img class="list-type" src="assets/icons/issue-{{item.issue_type}}.png">
+            </span>
+          </h2>
           <p>{{ item.volunteer_timestamp | date : "EEEE, MMM dd" }}</p>
         </div><!-- /item item-avatar -->
 
