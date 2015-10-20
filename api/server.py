@@ -232,6 +232,50 @@ def reset():
     MONGO_DB.items.create_index('user.user_id')
     MONGO_DB.items.create_index([('coord', pymongo.GEOSPHERE)])
 
+    men_names = [   'Michael',
+                    'Christopher',
+                    'Jason',
+                    'David',
+                    'James',
+                    'Matthew',
+                    'Joshua',
+                    'John',
+                    'Robert',
+                    'Joseph',
+                    'Daniel',
+                    'Brian',
+                    'Justin',
+                    'William',
+                    'Ryan',
+                    'Eric',
+                    'Nicholas',
+                    'Jeremy',
+                    'Andrew',
+                    'Timothy',
+                    ]
+    women_names = [ 'Jennifer',
+                    'Amanda',
+                    'Jessica',
+                    'Melissa',
+                    'Sarah',
+                    'Heather',
+                    'Nicole',
+                    'Amy',
+                    'Elizabeth',
+                    'Michelle',
+                    'Kimberly',
+                    'Angela',
+                    'Stephanie',
+                    'Tiffany',
+                    'Christina',
+                    'Lisa',
+                    'Rebecca',
+                    'Crystal',
+                    'Kelly',
+                    'Erin',
+                    ]
+
+    locations = [{"display_name": "Hall of Justice, 850, Bryant Street, West SoMa, SF, California, 94103, United States of America", "place_id": "77716342", "lon": "-122.404276851235", "longitude": -122.40409969279773, "lat": "37.77513815", "osm_type": "way", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "osm_id": "103383865", "latitude": 37.775497202938986, "address": {"city": "SF", "public_building": "Hall of Justice", "house_number": "850", "country": "United States of America", "county": "SF", "state": "California", "road": "Bryant Street", "country_code": "us", "neighbourhood": "West SoMa", "postcode": "94103"}}, {"display_name": "Masonic Memorial Temple, California Street, Nob Hill, SF, California, 94121, United States of America", "place_id": "62955667", "lon": "-122.412989954684", "longitude": -122.41259212318445, "lat": "37.7911743", "osm_type": "way", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "osm_id": "32947040", "latitude": 37.79172622091882, "address": {"building": "Masonic Memorial Temple", "city": "SF", "country": "United States of America", "county": "SF", "state": "California", "road": "California Street", "country_code": "us", "neighbourhood": "Nob Hill", "postcode": "94121"}}, {"display_name": "Pacific Heights School, Jackson Street, Pacific Heights, SF, California, 94118, United States of America", "place_id": "128111463", "lon": "-122.433660719451", "longitude": -122.43378544030038, "lat": "37.7928746", "osm_type": "relation", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "osm_id": "3528184", "latitude": 37.792588153804935, "address": {"city": "SF", "school": "Pacific Heights School", "country": "United States of America", "county": "SF", "state": "California", "road": "Jackson Street", "country_code": "us", "neighbourhood": "Pacific Heights", "postcode": "94118"}}, {"display_name": "W San Francisco, 181, 3rd Street, South of Market, SF, California, 94124, United States of America", "place_id": "2581161488", "lon": "-122.4004934", "longitude": -122.40027762562546, "lat": "37.7852231", "osm_type": "node", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "osm_id": "3455075365", "latitude": 37.785324799375196, "address": {"city": "SF", "house_number": "181", "country": "United States of America", "hotel": "W San Francisco", "county": "SF", "state": "California", "road": "3rd Street", "country_code": "us", "neighbourhood": "South of Market", "postcode": "94124"}}, {"display_name": "Bessie Carmichael Elementary School, Sherman Street, West SoMa, SF, California, 94103, United States of America", "place_id": "2589946130", "lon": "-122.406346944111", "longitude": -122.40644042819879, "lat": "37.776381", "osm_type": "way", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "osm_id": "353732824", "latitude": 37.776301321982054, "address": {"city": "SF", "school": "Bessie Carmichael Elementary School", "country": "United States of America", "county": "SF", "state": "California", "road": "Sherman Street", "country_code": "us", "neighbourhood": "West SoMa", "postcode": "94103"}}, {"display_name": "1819, O'Farrell Street, Japantown, SF, California, 94115, United States of America", "place_id": "454013727", "lon": "-122.433989032258", "longitude": -122.43397206536636, "lat": "37.783045516129", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "address": {"city": "SF", "house_number": "1819", "country": "United States of America", "county": "SF", "state": "California", "road": "O'Farrell Street", "country_code": "us", "neighbourhood": "Japantown", "postcode": "94115"}, "latitude": 37.782920025333375}, {"display_name": "Larkin Corner Market, 1496, Larkin Street, Nob Hill, SF, California, 94109, United States of America", "place_id": "45935682", "lon": "-122.4190711", "longitude": -122.4188555356079, "lat": "37.7916503", "osm_type": "node", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "osm_id": "3238659965", "latitude": 37.79197007570003, "address": {"city": "SF", "house_number": "1496", "country": "United States of America", "state": "California", "county": "SF", "convenience": "Larkin Corner Market", "road": "Larkin Street", "country_code": "us", "neighbourhood": "Nob Hill", "postcode": "94109"}}, {"display_name": "425-427, Fell Street, Western Addition, SF, California, 94102, United States of America", "place_id": "111832092", "lon": "-122.424853348218", "longitude": -122.42512028571167, "lat": "37.77548805", "osm_type": "way", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "osm_id": "239620171", "latitude": 37.775993017283575, "address": {"city": "SF", "house_number": "425-427", "country": "United States of America", "county": "SF", "state": "California", "road": "Fell Street", "country_code": "us", "neighbourhood": "Western Addition", "postcode": "94102"}}, {"display_name": "1337, Mission Street, West SoMa, SF, California, 94103, United States of America", "place_id": "114760930", "lon": "-122.41501277183", "longitude": -122.41481222411124, "lat": "37.77567495", "osm_type": "way", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "osm_id": "252570873", "latitude": 37.775406914373534, "address": {"city": "SF", "house_number": "1337", "country": "United States of America", "county": "SF", "state": "California", "road": "Mission Street", "country_code": "us", "neighbourhood": "West SoMa", "postcode": "94103"}}, {"display_name": "Academy of Art University, Natoma Street, South of Market, SF, California, 94105, United States of America", "place_id": "71853085", "lon": "-122.399521326362", "longitude": -122.39925333128576, "lat": "37.78625445", "osm_type": "way", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "osm_id": "80296763", "latitude": 37.78597752550215, "address": {"city": "SF", "school": "Academy of Art University", "country": "United States of America", "county": "SF", "state": "California", "road": "Natoma Street", "country_code": "us", "neighbourhood": "South of Market", "postcode": "94105"}}, {"display_name": "Turk Boulevard, Western Addition, SF, California, 94115, United States of America", "place_id": "49760363", "lon": "-122.4304968", "longitude": -122.42675538815486, "lat": "37.7807035", "osm_type": "way", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "osm_id": "8921634", "latitude": 37.781367626790264, "address": {"city": "SF", "country": "United States of America", "county": "SF", "state": "California", "road": "Turk Boulevard", "country_code": "us", "neighbourhood": "Western Addition", "postcode": "94115"}}, {"display_name": "USPS, Laguna Street, Pacific Heights, SF, California, 94123, United States of America", "place_id": "3849062", "lon": "-122.4284335", "longitude": -122.42825093783739, "lat": "37.7868203", "osm_type": "node", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "osm_id": "429641444", "latitude": 37.786721189542774, "address": {"city": "SF", "post_box": "USPS", "country": "United States of America", "county": "SF", "state": "California", "road": "Laguna Street", "country_code": "us", "neighbourhood": "Pacific Heights", "postcode": "94123"}}, {"display_name": "Jones & Sacramento, Jones Street, Nob Hill, SF, California, 94109, United States of America", "place_id": "15142508", "lon": "-122.414324", "longitude": -122.41468160820365, "lat": "37.792595", "osm_type": "node", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "osm_id": "1409407330", "latitude": 37.79268406978303, "address": {"city": "SF", "country_code": "us", "country": "United States of America", "county": "SF", "state": "California", "road": "Jones Street", "address29": "Jones & Sacramento", "neighbourhood": "Nob Hill", "postcode": "94109"}}, {"display_name": "643, Bryant Street, South of Market, SF, California, 94107, United States of America", "place_id": "453788606", "lon": "-122.398961428571", "longitude": -122.39886019649397, "lat": "37.7787388571429", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "address": {"city": "SF", "house_number": "643", "country": "United States of America", "county": "SF", "state": "California", "road": "Bryant Street", "country_code": "us", "neighbourhood": "South of Market", "postcode": "94107"}, "latitude": 37.778627293310755}, {"display_name": "SFJAZZ Center, 201, Franklin Street, Western Addition, SF, California, 94102, United States of America", "place_id": "2573769209", "lon": "-122.4215394", "longitude": -122.42109248391021, "lat": "37.77636975", "osm_type": "way", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "osm_id": "256720482", "latitude": 37.7760117286426, "address": {"city": "SF", "theatre": "SFJAZZ Center", "house_number": "201", "country": "United States of America", "county": "SF", "state": "California", "road": "Franklin Street", "country_code": "us", "neighbourhood": "Western Addition", "postcode": "94102"}}, {"display_name": "Temple Sherith Israel, 2266, California Street, Pacific Heights, SF, California, 94121, United States of America", "place_id": "62823669", "lon": "-122.43197845", "longitude": -122.43259645988049, "lat": "37.7894431", "osm_type": "way", "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright", "osm_id": "32965008", "latitude": 37.789455754244926, "address": {"place_of_worship": "Temple Sherith Israel", "city": "SF", "house_number": "2266", "country": "United States of America", "county": "SF", "state": "California", "road": "California Street", "country_code": "us", "neighbourhood": "Pacific Heights", "postcode": "94121"}}]
 
     user_profiles = []
     for i in range(53):
@@ -246,6 +290,31 @@ def reset():
                               })
 
     MONGO_DB.users.insert_many(user_profiles)
+
+    random.shuffle(user_profiles)
+
+    items = []
+    for i in range(16):
+        if i < 5:
+            issue_type = 'graffiti'
+        elif i < 10:
+            issue_type = 'trash'
+        elif i < 15:
+            issue_type = 'pothole'
+        elif i < 16:
+            issue_type = 'poop'
+
+        req = {'user_id': user_profiles[i]['user_id'],
+                'photo': WWW_SERVER_URL+'/assets/images/'+issue_type+'_'+str((i%5)+1)+'.jpg',
+                'issue_type': issue_type,
+                'location': locations[i],
+                'coord': [locations[i]['longitude'], locations[i]['latitude']],
+                }
+        items.append(req)
+
+    MONGO_DB.items.insert_many(items)
+
+
     
     return Response(json.dumps({'status': 'reset_complete',
                                 'timestamp': utcnow().isoformat(),
