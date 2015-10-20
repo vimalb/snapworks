@@ -16,7 +16,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
 
 ui-gmap-google-map.trip-map-summary > div.angular-google-map > div.angular-google-map-container {
   width: 100%;
-  height: 300px; /* this needs to be in px because google maps? */
+  /*height: 300px;  this needs to be in px because google maps? */
 }
 
 .nav-bar-block .bar {
@@ -35,11 +35,6 @@ ui-gmap-google-map.trip-map-summary > div.angular-google-map > div.angular-googl
   color: white !important;
 }
 
-/* temporarily here because we still have some images */
-img.trip-map-summary {
-  width: 100%;
-  height: 300px;
-}
 
 /* list dividers */
 .item.item-divider.section {
@@ -81,7 +76,7 @@ img.trip-map-summary {
 }
 
 .submitting {
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: 600;
   font-style: italic;
   color: #607D8B;
@@ -89,7 +84,7 @@ img.trip-map-summary {
 }
 
 .thanks {
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: 500;
   color: #4CAF50;
   text-align: center;
@@ -129,9 +124,34 @@ img.trip-map-summary {
 .bar .buttons span {
   color: white;
 }
+
+
+.pledges-detail .card .item.item-image {
+  display: block;
+  overflow: hidden;
+  height: 300px;
+}
+
+.pledges-detail .card .item.item-image img.route-image {
+  display: block; /* Otherwise it keeps some space around baseline */
+  min-width: 100%;    /* Scale up to fill container width */
+  min-height: 100%;   /* Scale up to fill container height */
+  -ms-interpolation-mode: bicubic; /* Scaled images look a bit better in IE now */
+}
+
+.route-detail .card .item.item-image {
+  display: block;
+  overflow: hidden;
+  height: 300px;
+}
+
+.route-detail .card .item.item-image img.trip-map-summary {
+  display: block; /* Otherwise it keeps some space around baseline */
+  min-width: 100%;    /* Scale up to fill container width */
+  min-height: 100%;   /* Scale up to fill container height */
+  -ms-interpolation-mode: bicubic; /* Scaled images look a bit better in IE now */
+}
 /* end this app */
-
-
 
 
 
@@ -464,11 +484,6 @@ img.trip-map-summary {
   font-weight: 500;
 }
 
-.pledges-detail .card img.route-image {
-  width: 100%;
-  height: 300px;
-}
-
 .pledges-detail .name {
   padding: 20px;
   text-align: center;
@@ -492,12 +507,6 @@ img.trip-map-summary {
 }
 
 
-/* start of section that probably should be pulled into directive
-   with route-detail? */
-.pledges-detail .card img.route-image {
-  width: 100%;
-  height: 300px;
-}
 
 .pledges-detail .card .item-body .details {
   background-color: rgba(255, 255, 255, 0.9);

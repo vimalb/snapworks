@@ -6,11 +6,13 @@
     </div>
     <div class="card">
       <div class="item item-divider">
-        {{ item.volunteer_timestamp }}
+        <div>{{ item.volunteer_timestamp | date : "EEEE, M/d 'at' h:mma" }}</div>
+        <div>{{ item.location.address.neighbourhood }}</div>
       </div>
       <div class="item item-image">
         <img class="trip-map-summary" ng-src="{{ item.photo }}" >
-
+      </div>
+      <div class="item item-image">
         <img class="trip-map-summary" ng-src="{{ item.map }}" >
       </div>
     </div>
