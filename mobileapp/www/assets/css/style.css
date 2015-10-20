@@ -45,6 +45,7 @@ img.trip-map-summary {
 .item.item-divider.section {
   border: none;
   font-weight: 500;
+  font-size: 1.3em;
 }
 
 .left {
@@ -95,6 +96,15 @@ img.trip-map-summary {
   font-size: 1.5em;
   vertical-align: middle;
 }
+
+.miles {
+  color: #607D8B;
+}
+
+/* end this app */
+
+
+
 
 .trip-feed .item.item-divider.date {
   /*background-color: #03A9F4;

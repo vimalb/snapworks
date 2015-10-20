@@ -6,16 +6,19 @@
   <ion-content class="padding pledges">
     <button ng-show="!currentUser.access_token" id="login-button" class="login button button-full button-calm" ng-click="goLogin()">Sign in</button>
 
-    <div class="name">
-      <h3>Nearby Issues</h3>
+    <div class="item item-divider section">
+      Nearby Issues
     </div>
 
     <div class="list">
-
       <div class="card" ng-repeat="item in items" ng-click="goItemDetail(item.item_id)">
-        <div class="item item-avatar">
-          <img class="profile-img" ng-src="{{ item.photo }}">
-          <p>{{ item.issue_type }}</p>
+        <div class="item item-image">
+          <!--img class="route-image" ng-src="{{ SERVER_URL+'/api/routes/all/'+route.route_id.toString()+'/map' }}"-->
+    
+          <div class="item item-avatar">
+            <img class="profile-img" ng-src="{{ item.photo }}">
+            <p>{{ item.issue_type }}</p>
+          </div>
         </div>
       </div><!-- /card -->
 
