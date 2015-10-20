@@ -57,6 +57,20 @@ deferredBootstrapper.bootstrap({
       });
       return deferred.promise;
     }],
+    VIDEO_SOURCES: ['$q', function ($q) {
+      var deferred = $q.defer();
+
+      MediaStreamTrack.getSources(function(sources) {
+        var availableSources = [];
+        _.each(sources, function(source) {
+          if(source.kind == 'video') {
+            availableSources.push(source.id);
+          }
+        });
+        deferred.resolve(availableSources);
+      });
+      return deferred.promise;
+    }],
   }
 });
     
