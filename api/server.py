@@ -510,6 +510,35 @@ def reset():
 
     MONGO_DB.items.insert_many(items)
 
+    messages = []
+    for item in items:
+        creation_date = dateutil.parser.parse(item['timestamp'])
+        future_span = int((utcnow() - creation_date).total_seconds()-100)
+
+        likers = random.sample(user_profiles, random.randint(1, 20))
+        volunteers = random.sample(user_profiles, random.randint(0, 5))
+
+        item_id = str(item['_id'])
+
+        for user in likers:
+            message = {'user': user,
+                       'item_id': item_id,
+                       'issue_type': item['issue_type'],
+                       'like': True,
+                       'timestamp': (creation_date + timedelta(seconds=random.randint(10,future_span))).isoformat(),
+                       'text': "Liked this"}
+            messages.append(message)
+
+        for user in volunteers:
+            message = {'user': user,
+                       'item_id': item_id,
+                       'issue_type': item['issue_type'],
+                       'volunteer': True,
+                       'timestamp': (creation_date + timedelta(seconds=random.randint(10,future_span))).isoformat(),
+                       'text': "Volunteered to help fix this!"}
+            messages.append(message)
+
+    MONGO_DB.messages.insert_many(messages)
 
     
     return Response(json.dumps({'status': 'reset_complete',
