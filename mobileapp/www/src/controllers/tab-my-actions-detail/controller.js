@@ -31,13 +31,61 @@ angular.module(MODULE_NAME, ['ionic', 'ngCordova'])
 
       $scope.messages = [];
       $scope.newMessage = {'text': ''};
+      $scope.self_like = false;
+      $scope.self_volunteer = false;
+      $scope.like_count = 0;
+      $scope.volunteer_count = 0;
+      $scope.message_count = 0;
 
       $scope.loadMessages = function() {
         itemSearchService.getMessages($scope.item.item_id).then(function(messages) {
-          $scope.messages = messages;
-          console.log(messages);
+          $scope.updateMessages(messages);
+          //console.log(messages);
         });
       }
+
+      $scope.updateMessages = function(messages) {
+          $scope.messages = messages;
+
+          $scope.self_like = false;
+          $scope.self_volunteer = false;
+          $scope.like_count = 0;
+          $scope.volunteer_count = 0;
+          $scope.message_count = 0;
+
+          _.each(messages, function(message) {
+            $scope.message_count = $scope.message_count + 1;
+            if(message.volunteer) {
+              $scope.volunteer_count = $scope.volunteer_count + 1;
+              if(message.user.user_id == userService.getCurrentUser().user_id) {
+                $scope.self_volunteer = true;
+              }
+            }
+            if(message.like) {
+              $scope.like_count = $scope.like_count + 1;
+              if(message.user.user_id == userService.getCurrentUser().user_id) {
+                $scope.self_like = true;
+              }
+            }
+          });
+      }
+
+      $scope.likeItem = function() {
+        if(!$scope.self_like) {
+          itemSearchService.sendMessage($scope.item.item_id, {'like': true, 'text':'Liked this'}).then(function(messages) {
+            $scope.updateMessages(messages);
+          });
+        }
+      }
+
+      $scope.volunteerItem = function() {
+        if(!$scope.self_volunteer) {
+          itemSearchService.sendMessage($scope.item.item_id, {'volunteer': true, 'text':'Volunteered to help fix this!'}).then(function(messages) {
+            $scope.updateMessages(messages);
+          });
+        }
+      }
+
 
       $scope.submitMessage = function() {
         if($scope.newMessage.text) {
@@ -52,10 +100,11 @@ angular.module(MODULE_NAME, ['ionic', 'ngCordova'])
         console.log('stateParams', $stateParams);
         itemSearchService.getItem($stateParams.itemId).then(function(item) {
           $scope.item = item;
+          console.log(item);
           $scope.loadMessages();
           $scope.pollInterval = $interval(function() {
             $scope.loadMessages();
-          }, 1000);
+          }, 2000);
         });
       });
 

@@ -99,7 +99,7 @@ angular.module(MODULE_NAME, [])
 
 
         getMessages: function(itemId) {
-          console.log("Fetching messages for item", itemId);
+          //console.log("Fetching messages for item", itemId);
           var deferred = $q.defer();
           var url = CLIENT_SETTINGS.SERVER_URL + '/api/items/all/' + itemId.toString() + '/messages';
           $http.get(url).then(function(resp) {

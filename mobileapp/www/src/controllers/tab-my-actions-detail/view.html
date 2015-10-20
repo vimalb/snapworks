@@ -1,5 +1,5 @@
 <ion-view>
-  <ion-nav-title>Volunteer: {{ item.issue_type }}</ion-nav-title>
+  <ion-nav-title>Volunteer: {{ item.issue_type }} cleanup</ion-nav-title>
   <ion-content class="padding pledges-detail">
     <div class="name">
       <h3>Volunteer</h3>
@@ -9,6 +9,10 @@
     <div class="card">
       <div class="item item-image">
         <img class="route-image" ng-src="{{ item.photo }}" >
+      </div>
+
+      <div class="item item-image">
+        <img class="route-image" ng-src="{{ item.map }}" >
       </div>
 
     </div><!-- /card -->
@@ -26,10 +30,23 @@
 
     <div class="comment_bar">
       <div class="add_comment">
-        <textarea rows="3" cols="50" ng-model="newMessage.text" class="comment_box" placeholder="Tell others about your plans to beautify your city!"></textarea>
+        <textarea rows="3" cols="50" ng-model="newMessage.text" class="comment_box" placeholder="Tell others about your plans to help out!"></textarea>
         <button ng-click="submitMessage()" class="button button-block button-calm comment_submit">Send</button>
       </div>
     </div>
+
+    <div class="item tabs tabs-secondary tabs-icon-left volunteer-actions">
+      <a class="tab-item" ng-click="volunteerItem()">
+          <span ng-show="!self_volunteer"><i class="icon ion-ios-body"></i>Join</span>
+          <span ng-show="self_volunteer"><i class="icon ion-ios-body action-completed"></i>Joined</span>
+      </a>
+
+      <a class="tab-item" ng-click="likeItem()">
+        <span ng-show="!self_like"><i class="icon ion-thumbsup"></i>Like</span>
+        <span ng-show="self_like"><i class="icon ion-thumbsup action-completed"></i>Liked</span>
+      </a>
+    </div><!-- / tabs-secondary -->
+
 
     <button class="button button-full button-balanced" ng-click="shareOnFacebook()">
       Share on Facebook

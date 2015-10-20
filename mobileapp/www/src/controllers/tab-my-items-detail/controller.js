@@ -35,6 +35,7 @@ angular.module(MODULE_NAME, ['ionic'])
         generateProfilePics();
         itemSearchService.getItem($stateParams.itemId).then(function(item) {
           $scope.item = item;
+          console.log(item);
         });
       });
 
