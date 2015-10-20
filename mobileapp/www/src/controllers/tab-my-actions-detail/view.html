@@ -2,11 +2,15 @@
   <ion-nav-title>Volunteer: {{ item.issue_type }} cleanup</ion-nav-title>
   <ion-content class="padding pledges-detail">
     <div class="name">
-      <h3>Volunteer</h3>
-      <h3>{{ item.issue_type }}</h3>
+      <h3>Volunteer for</h3>
+      <h3 class="type-header">{{ item.issue_type }} cleanup</h3>
     </div>
 
     <div class="card">
+      <div class="item item-divider">
+        <div>{{ item.volunteer_timestamp | date : "EEEE, M/d 'at' h:mma" }}</div>
+        <div>{{ item.location.address.neighbourhood }}</div>
+      </div>
       <div class="item item-image">
         <img class="route-image" ng-src="{{ item.photo }}" >
       </div>
@@ -17,11 +21,8 @@
 
     </div><!-- /card -->
 
-
     <div class="comment list">
       <a class="item item-avatar" ng-repeat="message in messages" href="#">
-        <!-- XXX replace with user profile -->
-        <!--img class="profile-img" ng-src="{{message.user_profile}}"-->
         <img class="profile-img" ng-src="{{ message.user.photo_url }}">
         <h2>{{ message.user.username }}</h2>
         <p>{{message.text}}</p>
