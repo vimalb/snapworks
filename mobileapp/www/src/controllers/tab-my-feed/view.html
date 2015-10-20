@@ -20,24 +20,38 @@
 
 	  	<button id="snapshot-button" class="button button-full button-calm" ng-click="switchCam()">Switch Camera</button>
 
-	  	<button id="snapshot-button" class="button button-full button-calm" ng-click="takeSnapshot()">Fix It!</button>
+      <button id="snapshot-button" class="button button-full button-calm" ng-click="takeSnapshot()">
+        <icon class="ion-ios-camera"></icon>
+        <span>Fix It!</span>
+      </button>
 	</div>
 	<div ng-show="state == 'choosing_issue'">
 		<img ng-src="{{ photoInfo }}"></img>
-	  	<button class="button button-full button-calm" ng-click="reportIssue('litter')">Report Trash</button>
-	  	<button class="button button-full button-calm" ng-click="reportIssue('graffiti')">Report Graffiti</button>
-	  	<button class="button button-full button-calm" ng-click="reportIssue('other')">Report Other</button>
+    <button class="button button-full button-calm" ng-click="reportIssue('litter')">
+      <span>Report Trash</span>
+      <icon class="report-type ion-trash-a"></icon>
+    </button>
+    <button class="button button-full button-calm" ng-click="reportIssue('graffiti')">
+      <span>Report Graffiti</span>
+      <icon class="report-type ion-paintbrush"></icon>
+    </button>
+    <button class="button button-full button-calm" ng-click="reportIssue('other')">
+      <span>Report Other</span>
+      <icon class="report-type ion-help-circled"></icon>
+    </button>
 	</div>
 
 	<div ng-show="state == 'uploading_issue'">
 		<img ng-src="{{ photoInfo }}"></img>
-		Submitting {{ reportedIssue.issue_type }} report
+    <p class="submitting">
+      Submitting {{ reportedIssue.issue_type }} report...
+    </p>
 	</div>
 
 	<div ng-show="state == 'confirming_issue'">
 		<img ng-src="{{ photoInfo }}"></img>
-		Thank you for reporting {{ reportedIssue.issue_type }}
-	</div>
+    <p class="thanks">Thank you for doing your civic duty!</p>
+  </div>
 
 
     <br>

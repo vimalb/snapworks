@@ -6,17 +6,55 @@
   <ion-content class="padding pledges">
     <button ng-show="!currentUser.access_token" id="login-button" class="login button button-full button-calm" ng-click="goLogin()">Sign in</button>
 
-    <div class="name">
-      <h3>Nearby Issues</h3>
+    <h2>Nearby Issues</h2>
+    <div class="item item-divider section">
+      This Week
     </div>
 
     <div class="list">
-
       <div class="card" ng-repeat="item in items" ng-click="goItemDetail(item.item_id)">
         <div class="item item-avatar">
-          <img class="profile-img" ng-src="{{ item.photo }}">
-          <p>{{ item.issue_type }}</p>
-        </div>
+          <img class="profile-img" src="assets/img/profile_pic.png">
+          <h2>{{ item.issue_type }} cleanup</h2>
+          <p>Tuesday</p>
+        </div><!-- /item item-avatar -->
+
+        <div class="item item-body" ng-init="showComments=false">
+          <img class="full-image" ng-src="{{ item.photo }}">
+          <p>Hi everyone!<br> We are planning to get together and clean up the hill behind the Bart station. Come if you can! </p>
+          <p>
+            <a href="#" class="subdued"> 
+              4 <icon class="ion-person-stalker"></icon>
+            </a>
+            <a href="#" class="subdued">10 Likes </a>
+            <a href="#" class="subdued">5 Comments</a>
+            <!--a href="#" class="subdued" ng-click="showComments=!showComments;$event.stopPropagation()">5 Comments</a-->
+          </p> 
+          <div class="check-element animate-show" ng-show="showComments">
+            <div class="list">
+              <a class="item item-avatar" ng-repeat="message in messages" href="#">
+                <img class="profile-img" src="assets/img/profile_pic.png">
+                <h2>{{ message.username }}</h2>
+                <p>{{message.text}}</p>
+              </a>
+            </div> 
+          </div>
+        </div><!-- /item-body -->
+
+        <div class="item tabs tabs-secondary tabs-icon-left volunteer-actions">
+          <a class="tab-item" href="#">
+            <i class="icon ion-ios-body"></i>
+            Join
+          </a>
+          <a class="tab-item" href="#">
+            <i class="icon ion-thumbsup"></i>
+            Like
+          </a>
+          <a class="tab-item" href="#">
+            <i class="icon ion-chatbox"></i>
+            Comment
+          </a>
+        </div><!-- / tabs-secondary -->
       </div><!-- /card -->
 
     </div><!-- /list -->

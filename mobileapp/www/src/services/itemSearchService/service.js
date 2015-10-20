@@ -62,7 +62,6 @@ angular.module(MODULE_NAME, [])
           return deferred.promise;
         },
 
-
         createItem: function(item) {
           var deferred = $q.defer();
           var url = CLIENT_SETTINGS.SERVER_URL + '/api/users/' + userService.getCurrentUser().user_id + '/items';

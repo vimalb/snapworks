@@ -14,15 +14,21 @@
     </div><!-- /card -->
 
 
+    <div class="comment list">
+      <a class="item item-avatar" ng-repeat="message in messages" href="#">
+        <!-- XXX replace with user profile -->
+        <!--img class="profile-img" ng-src="{{message.user_profile}}"-->
+        <img class="profile-img" src="assets/img/profile_pic.png">
+        <h2>{{ message.username }}</h2>
+        <p>{{message.text}}</p>
+      </a>
+    </div> 
+
     <div class="comment_bar">
       <div class="add_comment">
-        <input ng-model="newMessage.text" class="comment_box" placeholder=""></input>
-        <button ng-click="submitMessage()" class="comment_submit">Send</button>
+        <textarea rows="3" cols="50" ng-model="newMessage.text" class="comment_box" placeholder="Tell others about your plans to beautify your city!"></textarea>
+        <button ng-click="submitMessage()" class="button button-block button-calm comment_submit">Send</button>
       </div>
-    </div>
-
-    <div class="comment" ng-repeat="message in messages">
-      <p class="add_comment"><span class="comment-username">@{{ message.username }}:</span> {{ message.text }}</p>
     </div>
 
     <button class="button button-full button-balanced" ng-click="shareOnFacebook()">

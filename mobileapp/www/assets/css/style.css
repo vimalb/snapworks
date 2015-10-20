@@ -45,6 +45,7 @@ img.trip-map-summary {
 .item.item-divider.section {
   border: none;
   font-weight: 500;
+  font-size: 1.3em;
 }
 
 .left {
@@ -61,25 +62,8 @@ img.trip-map-summary {
 
 .login.button {
   margin: 10px auto;
-  /*background-color: #80D8FF;
-  color: black;
-  border-color: #03A9F4;*/
-  /*background-color: #B3E5FC;
-  color: black;*/
 }
 
-
-
-/*
-progress[value]::-webkit-progress-bar {
-  background-color: #00E676;
-}
-
-progress[value]::-webkit-progress-value {
-    border-radius: 2px;
-    background-size: 35px 20px, 100% 100%, 100% 100%;
-}
-*/
 
 
 
@@ -87,7 +71,51 @@ progress[value]::-webkit-progress-value {
  * Feed tab styling
  */
 
-/* trip card background image */
+#snapshot-button .ion-ios-camera {
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+
+.submitting {
+  font-size: 1.5em;
+  font-style: italic;
+}
+
+.thanks {
+  font-size: 1.5em;
+  font-weight: 500;
+  color: #4CAF50;
+}
+
+.report-type {
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+
+.miles {
+  color: #607D8B;
+}
+
+.volunteer-actions {
+  margin-top: 1px;
+}
+
+
+.comment_box {
+  padding: 7px;
+  border: 1px solid #B3E5FC;
+}
+
+/* end this app */
+
+
+
+
+
+
+
+
+
 .trip-feed .item.item-divider.date {
   /*background-color: #03A9F4;
   color: white;*/
@@ -377,6 +405,13 @@ progress[value]::-webkit-progress-value {
 .pledges .list .card .item-avatar h2 {
   font-size: 1.2em;
   font-weight: 500;
+  text-align: left;
+}
+
+.pledges .list .card .item-avatar {
+  font-size: 1.2em;
+  font-weight: 500;
+  text-align: left;
 }
 
 .pledges .list .card .item-avatar h2 .price {

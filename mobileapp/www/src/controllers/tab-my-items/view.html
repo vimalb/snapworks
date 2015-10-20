@@ -11,17 +11,14 @@
       <div class="card" ng-repeat="item in myItems" ng-click="goItemDetail(item.item_id)">
         <div class="item item-divider header">
           <div class="route-title">
-            <span>{{ item.issue_type }}</span>
+            <span class="left">{{ item.issue_type }}</span>
+            <span class="right miles">North Beach, SF</span>
           </div>
         </div><!-- item item-divider header -->
-
         <div class="item item-image">
           <img class="route-image" ng-src="{{ item.photo }}" >
         </div>
-
       </div>
-
-
     </div>
     <br>
 
