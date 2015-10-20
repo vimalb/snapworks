@@ -177,10 +177,12 @@ def items_messages(item_id):
 
 
 ICON_URLS = {
-    'default': 'http://goo.gl/sWSDFa',
-    'graffiti': 'http://goo.gl/RG2kNl',
-    'trash': 'http://goo.gl/PS4Dor',
-    'other': 'http://goo.gl/8uGb5R',
+    'default': 'http://goo.gl/Oev1D6',
+    'graffiti': 'http://goo.gl/lncU0b',
+    'trash': 'http://goo.gl/J2eZDy',
+    'pothole': 'http://goo.gl/2iuuUX',
+    'poop': 'http://goo.gl/7RTiRL',
+    'other': 'http://goo.gl/YD6n4t',
     }
 
 def coord_to_str(coord):
