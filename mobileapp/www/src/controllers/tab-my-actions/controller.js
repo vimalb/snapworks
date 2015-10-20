@@ -48,13 +48,6 @@ angular.module(MODULE_NAME, ['ionic'])
       itemSearchService.getNearbyItems().then(function(items) {
         $scope.items = items;
       });
-
-      /* begin delete region */
-      /*itemSearchService.getMyItems().then(function(items) {
-        $scope.items = items;
-        console.log('my items', items);
-      });*/
-      /* end delete region */
     }
 
     $scope.$on('$ionicView.beforeEnter', function(){

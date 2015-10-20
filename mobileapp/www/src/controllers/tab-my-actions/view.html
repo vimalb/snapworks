@@ -6,19 +6,51 @@
   <ion-content class="padding pledges">
     <button ng-show="!currentUser.access_token" id="login-button" class="login button button-full button-calm" ng-click="goLogin()">Sign in</button>
 
+    <h2>Nearby Issues</h2>
     <div class="item item-divider section">
-      Nearby Issues
+      This Week
     </div>
 
     <div class="list">
       <div class="card" ng-repeat="item in items" ng-click="goItemDetail(item.item_id)">
-        <div class="item item-image">
-          <!--img class="route-image" ng-src="{{ SERVER_URL+'/api/routes/all/'+route.route_id.toString()+'/map' }}"-->
-    
+        <div class="item item-avatar">
+          <img class="profile-img" src="assets/img/profile_pic.png">
+          <h2>{{ item.issue_type }} cleanup</h2>
+          <p>Tuesday</p>
+        </div>
+
+        <div class="item item-body">
+          <img class="full-image" ng-src="{{ item.photo }}">
+          <p>Hi everyone!<br> We are planning to get together and clean up the hill behind the Bart station. Come if you can! </p>
+          <p>
+            <a href="#" class="subdued"> 
+              4 <icon class="ion-person-stalker"></icon>
+            </a>
+            <a href="#" class="subdued">10 Likes </a>
+            <a href="#" class="subdued">5 Comments</a>
+          </p> 
+        </div>
+        <div class="item tabs tabs-secondary tabs-icon-left volunteer-actions">
+            <a class="tab-item" href="#">
+              <i class="icon ion-ios-body"></i>
+              Join
+            </a>
+            <a class="tab-item" href="#">
+              <i class="icon ion-thumbsup"></i>
+              Like
+            </a>
+            <a class="tab-item" href="#">
+              <i class="icon ion-chatbox"></i>
+              Comment
+            </a>
+          </div>
+          <!--dev class="item item-image">
+            <img class="route-image" ng-src="{{ SERVER_URL+'/api/routes/all/'+route.route_id.toString()+'/map' }}">
+          <img class="route-image" src="assets/img/map1.png"> 
           <div class="item item-avatar">
             <img class="profile-img" ng-src="{{ item.photo }}">
             <p>{{ item.issue_type }}</p>
-          </div>
+          </div-->
         </div>
       </div><!-- /card -->
 

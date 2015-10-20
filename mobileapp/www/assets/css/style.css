@@ -96,7 +96,18 @@ img.trip-map-summary {
   color: #607D8B;
 }
 
+.volunteer-actions {
+  margin-top: 1px;
+}
+
+
+
 /* end this app */
+
+
+
+
+
 
 
 
@@ -390,6 +401,13 @@ img.trip-map-summary {
 .pledges .list .card .item-avatar h2 {
   font-size: 1.2em;
   font-weight: 500;
+  text-align: left;
+}
+
+.pledges .list .card .item-avatar {
+  font-size: 1.2em;
+  font-weight: 500;
+  text-align: left;
 }
 
 .pledges .list .card .item-avatar h2 .price {
