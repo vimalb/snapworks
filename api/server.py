@@ -144,7 +144,7 @@ def items_detail(item_id):
 @app.route("/api/items/popular", methods=['GET'])
 def items_popular():
     if request.method in ['GET']:
-        resp = [_clean_item(item) for item in MONGO_DB.items.find({}).sort("timestamp",pymongo.DESCENDING)][:10]
+        resp = [_clean_item(item) for item in MONGO_DB.items.find({}).sort("timestamp",pymongo.DESCENDING).limit(10)]
         return Response(json.dumps(resp), mimetype='application/json')
 
 @app.route("/api/items/nearby", methods=['POST'])
