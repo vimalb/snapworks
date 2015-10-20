@@ -101,6 +101,10 @@ img.trip-map-summary {
 }
 
 
+.comment_box {
+  padding: 7px;
+  border: 1px solid #B3E5FC;
+}
 
 /* end this app */
 
